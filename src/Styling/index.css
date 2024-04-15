@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+
+:root {
+  --first-color: #f0c713;
+  --title-color: hsl(0, 0%, 95%);
+  --text-color: white;
+  --body-color: #131212;
+  --body-font: "Lato", sans-serif;
+  --second-font: "Dancing Script", cursive;
+  --small-font-size: 14px;
+  /* --h2-font-size: 1.25rem; */
+  /* --font-semi-bold: 600; */
+}
+
+body {
+  background-color: var(--body-color) !important;
+  color: var(--text-color) !important;
+}
+
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--text-color);
+}
+.btn-theme {
+  background: #e54c2a;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #e54c2a;
+  /* height: 50px; */
+  /* line-height: 34px; */
+}
+.btn-wide {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+
+
+/*------------------- Header -------------------------------------*/
+header {
+  /* position: absolute !important; */
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+header .NavBar {
+  font-size: 14px !important;
+  border-bottom: 1px solid #f0c713;
+}
+.flex-full{
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+.NavBar .nav-link {
+  color: var(--text-color) !important;
+}
+
+.upperFixedBar {
+  min-height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px !important;
+
+}
+
+.upperFixedBar ul {
+  margin: 0%;
+  gap: 20px;
+}
+
+header .menu-link {
+  border: none ;
+  outline: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: var(--small-font-size);
+}
+
+
+/*--------------------------------- header end --------------------------------------------*/
+/*--------------------------------- breadcrumbs --------------------------------------------*/
+.breadcrumbs{
+  /* margin-top: 150px; */
+  margin: 0 auto;
+  text-align: center;
+  border:1px solid yellow ;
+  width: max-content;
+
+}
+/*--------------------------------- breadcrumbs end --------------------------------------------*/
+
+/*--------------------------------- Home --------------------------------------------*/
+.Home {
+  /* margin-top: 28px; */
+  position: relative;
+}
+
+.homeImageSlides {
+  filter: brightness(0.5);
+}
+
+.homeTextContainer {
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: auto;
+  bottom: 13%;
+  text-align: center;
+}
+
+.homeTextContainer h4 {
+  font-size: 4vw;
+  color: var(--text-color);
+  font-weight: 400;
+  /* margin: 10px 0; */
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.homeTextContainer .btnHome {
+  color: var(--text-color) !important;
+  text-transform: uppercase;
+  /* font-weight: 700; */
+  /* font-size: 8px; */
+  border-color: var(--text-color);
+  transition: all 0.5s ease-in;
+}
+
+.homeTextContainer img {
+  margin: 0 auto;
+  width: 11.5%;
+}
+
+
+/* Footer */
+footer .container div {
+  margin: 10px 0;
+}
+
+footer ul,
+footer p {
+  font-size: var(--small-font-size);
+}
+
+footer .contact li:hover,
+.contact .link:hover {
+  color: var(--first-color);
+  cursor: pointer;
+}
+
+.copyright{
+background-color: var(--first-color);
+box-shadow: 0 0 0 100vmax var(--first-color);
+clip-path: inset(0 -100vmax);
+}
+.copyright .link:hover{
+  color: var(--body-color);
+}
+
+
+
+/* ---------------dishes------------------------ */
+.dishes{
+  justify-content: center !important;
+  padding: 40px 0;
+}
+.divider{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.divider hr{
+  color: var(--first-color);
+  width: 50px;
+  border-width: 2px;
+  opacity: 1;
+  margin: 10px 0;
+}
+.build-img {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  box-shadow: 0 1px 5px 0 #000;
+  position: relative;
+}
+.build-img .bg-img {
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  width: 100%;
+  height: 400px;
+  transition: transform .5s ease;
+}
+.build-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: auto;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.dish-btn {
+  background: var(--first-color) !important;
+  border: 1px solid var(--first-color) !important;
+  border-radius: 5px !important;
+  color: var(--text-color) !important;
+  transition: all 0.5s ease-in !important;
+  font-weight: 600 !important;
+  /* padding: 10px 25px; */
+}
+
+.dish-btn:hover {
+  background: white !important;
+  color: var(--first-color) !important;
+}
+.build-img .bg-img:hover{
+  transform: scale(1.2);
+}
+/*--------------------------------- Dishes end----------------------------------------- */
+
+
+/*---------------------------------- about us-------------------------------*/
+.about{
+  background: #fff;
+  color: #000;
+  width: 100%;
+  padding-bottom: 50px;
+}
+.commontop h4 {
+  font-family: "Times Roman";
+  font-size: 36px;
+  font-weight: 400;
+  text-transform: capitalize;
+  margin: 50px 0 10px;
+  text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.9);
+}
+.about .commontop h4{
+  color: #333;
+  
+}
+.about .commontop p {
+  margin: 0 0 24px;
+}
+.about .homeImageSlides{
+  max-width: 500px !important;
+  height: 450px !important;
+}
+
+/*------------------------- Our Menu Item----------------------------*/
+ .menu-box{
+  text-align: center;
+  border: 1px solid white;
+  padding: 5px 10px 20px 10px;
+  margin:10px 0;
+}
+ .menu-box:hover {
+  box-shadow: 0 0 5px var(--first-color);
+
+}
+ .menu-box .image{
+  width: 130px;
+  height: 130px;
+  margin: auto;
+}
+.menu-box .image img{
+  width: 130px;
+  height: 130px;
+  margin: auto;
+}
+ .caption h4, .caption .price {
+  font-size: 16px;
+  color: var(--first-color);
+  font-weight: bold;
+  text-align: center;
+}
+ .caption span{
+  font-size: 14px;
+  text-align: justify;
+}
+
+/*-------------------------  Menu items end ----------------------------*/
+/*------------------------- register and login style ----------------------------*/
+.registerDiv{
+  background-color: #fff;
+  background-image: url('../Assets/team-right.png');
+  background-repeat: no-repeat;
+  background-position: 100%;
+}
+.registerContainer{
+  background-color: #f5f5f5;
+  color: #757575;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.548);
+  border-radius: 10px;
+}
+.inputPlusIcon{
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.inputPlusIcon input{
+  padding-right: 35px;
+}
+.inputPlusIcon .iconStyle{
+  color: var(--first-color);
+ position: absolute;
+ right: 5px;
+}
+.error{
+  color: red;
+  flex:0 0 100% ;
+  display: none;
+}

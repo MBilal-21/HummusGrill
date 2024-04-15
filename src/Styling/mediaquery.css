@@ -1,0 +1,71 @@
+/* xs <576px 
+sm ≥576px	
+md ≥768px	
+lg ≥992px	
+xl ≥1200px	
+xxl ≥1400px */
+@media screen and (width>=992px) {
+
+    /* header */
+    header {
+        position: absolute !important;
+    }
+
+    .upperFixedBar {
+        font-size: 14px !important;
+    }
+
+    .flex-full {
+        flex: 0;
+    }
+
+    /* breadcrumbs */
+    .breadcrumbs {
+        margin-top: 200px;
+    }
+
+    /* menu item start */
+    .menu-box {
+        display: flex;
+        padding-right: 20px;
+    }
+
+    .image {
+        flex: 0 0 200px;
+    }
+
+    .caption {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .caption h4 {
+        flex: 0 0 80%;
+        order: 1;
+        text-align: start;
+    }
+
+    .caption span {
+        flex: 0 0 100%;
+        order: 3;
+        /* text-align: justify; */
+    }
+
+    .caption .price {
+        flex: 0 0 20%;
+        order: 2;
+    }
+
+    .caption button {
+        order: 4;
+        flex: 0 0 60%;
+        margin-left: auto;
+    }
+
+    /* menu item end */
+}
+
+@media screen and (width>=768px) {}
+
+@media screen and (width>=576px) {}
