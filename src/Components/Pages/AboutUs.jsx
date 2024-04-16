@@ -4,18 +4,17 @@ import banner1 from "../../Assets/banner-1.jpg";
 import banner2 from "../../Assets/banner-2.jpg";
 import banner3 from "../../Assets/banner-3.jpg";
 import banner4 from "../../Assets/banner-4.jpg";
+import Divider from "../Divider";
 const AboutUs = () => {
   return (
     <div className="about">
       <div className="container">
-        <div className="row" style={{ alignItems: "center" }}>
+        
+        <div className="row" style={{ alignItems: "center", paddingTop:"50px" }}>
           {/* <!-- Title Content Start --> */}
           <div className="col-sm-12 col-md-12 col-lg-6 col-xs-12 commontop text-left">
             <h4>about our restaurant food &amp; drinkes</h4>
-            <div className="divider style-1 left">
-              <i className="icofont icofont-ui-press hr-icon left"></i>
-              <span className="hr-simple right"></span>
-            </div>
+            <Divider/>
 
             <p className="des">
               Hummus Mediterranean Grill has been serving the Hagerstown

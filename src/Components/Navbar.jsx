@@ -26,19 +26,19 @@ function BasicExample() {
       <div className="top bg-black">
         <Container className="upperFixedBar">
           <a href="tel:+1240-513-6020" className="link ">
-            <LocalPhoneIcon style={{ fontSize: "20px" }} />
+            <LocalPhoneIcon className="header-icon" />
             Hotline: 240-513-6020
           </a>
 
           <ul className="d-flex">
             <li>
               {" "}
-              <ShoppingCartSharpIcon /> Cart
+              <ShoppingCartSharpIcon className="header-icon"/> Cart {" "} <span>0</span>
             </li>
             <li>
               <Dropdown as={NavItem}>
                 <Dropdown.Toggle as={NavLink}>
-                <PersonIcon/>  My Account
+                <PersonIcon className="header-icon"/>  My Account
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {show ? (
@@ -52,15 +52,15 @@ function BasicExample() {
                     </>
                   ) : (
                     <>
-                      <Dropdown.Item>Hello there2!</Dropdown.Item>
-                      <Dropdown.Item>Hello there!2</Dropdown.Item>
+                      <Dropdown.Item>Dashboard</Dropdown.Item>
+                      <Dropdown.Item>LogOut</Dropdown.Item>
                     </>
                   )}
                 </Dropdown.Menu>
               </Dropdown>
             </li>
             <li>
-              <FacebookOutlinedIcon />
+              <FacebookOutlinedIcon className="header-icon"/>
             </li>
           </ul>
         </Container>
@@ -100,9 +100,9 @@ function BasicExample() {
                 <Link to="/" className="nav-link">
                   HOME
                 </Link>
-                <a href="/#ourMenu" className="nav-link">
+                <Link to="/menu" className="nav-link">
                   MENU
-                </a>
+                </Link>
                 <NavDropdown title="BUILD YOUR MEAL" id="basic-nav-dropdown">
                   <Link to="create-bowl" className="dropdown-item">
                     CREATE BOWL
@@ -112,10 +112,10 @@ function BasicExample() {
                     CREATE WRAP
                   </Link>
                 </NavDropdown>
-                <Link to="link" className="nav-link">
+                <Link to="/signature-wrap" className="nav-link">
                   SIGNATURE WRAPS
                 </Link>
-                <Link to="link" className="nav-link">
+                <Link to="/order-history" className="nav-link">
                   ORDER HISTORY
                 </Link>
                 <Link to="about" className="nav-link">

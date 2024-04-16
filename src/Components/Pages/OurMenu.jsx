@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Divider from "../Divider";
+import {  useLocation } from "react-router-dom";
 import ItemsMap from "../ItemsMap";
 const OurMenu = () => {
+  const location = useLocation();
+  const scrollref = useRef(null);
+  const executeScroll = () => scrollref.current.scrollIntoView();
+  
+  useEffect(()=>{
+    if(location.pathname === "/menu"){executeScroll()}
+  },[location])
+
+
   return (
-    <Container className="ourMenu" id="ourMenu">
+    <Container className="ourMenu" id="ourMenu"  ref={scrollref}>
       <div className=" text-center">
         <hr />
         <h4>Our Menu</h4>
