@@ -20,7 +20,7 @@ import EmailIcon from "@mui/icons-material/Email";
 const Login = () => {
   // Initializing state for error and input using useState hook
   const [err, setError] = useState(null);
-  const [input, setInput] = useState({
+  const [Input, setInput] = useState({
     email: "",
     password: "",
   });
@@ -28,7 +28,7 @@ const Login = () => {
   // Using useEffect hook to log the input state whenever it changes
   useEffect(() => {
     // console.log(input);
-  }, [input]);
+  }, [Input]);
 
   // Defining the handleChange function to handle input changes
   const handleChange = (e) => {

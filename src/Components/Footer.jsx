@@ -60,7 +60,7 @@ const Footer = () => {
       </Container>
 
       {/*   Copyright Start  */}
-      <Container className="copyright">
+      <Container className="copyright container-bg-clr">
         <div className="m-0 d-flex  justify-content-between align-items-center py-3 text-center flex-wrap">
           <div className="">
             <Image src={logo} fluid alt="logo" width={120} />
@@ -68,9 +68,9 @@ const Footer = () => {
           <div className="order-md-2">
             {/*   Footer Social Start */}
             <ul className="d-flex align-item-center m-0">
-              <li><a href="https://www.facebook.com/hummusmd/" target="_blank"  className="link"> <FacebookSharpIcon /></a></li>
-              <li><a href="https://www.facebook.com/hummusmd/" target="_blank"  className="link"> <FacebookSharpIcon /></a></li>
-              <li><a href="https://www.facebook.com/hummusmd/" target="_blank"  className="link"> <FacebookSharpIcon /></a></li>
+              <li><a href="https://www.facebook.com/hummusmd/" target="_blank"  rel="noreferrer" className="link"> <FacebookSharpIcon /></a></li>
+              <li><a href="https://www.facebook.com/hummusmd/" target="_blank"  rel="noreferrer" className="link"> <FacebookSharpIcon /></a></li>
+              <li><a href="https://www.facebook.com/hummusmd/" target="_blank"  rel="noreferrer" className="link"> <FacebookSharpIcon /></a></li>
             </ul>
             {/*  Footer Social End */}
           </div>

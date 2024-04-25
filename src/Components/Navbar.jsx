@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { Appstate } from "../App";
+import React, { useState,useContext } from "react";
 import logo from "../Assets/logo.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -17,7 +18,7 @@ import Breadcrumbs from "./Breadcrumb";
 
 function BasicExample() {
   const [show, setShow] = useState(true);
-  
+  const useAppSate = useContext(Appstate);
 
   return (
     <>
@@ -31,9 +32,10 @@ function BasicExample() {
           </a>
 
           <ul className="d-flex">
-            <li>
-              {" "}
+            <li onClick={()=>{ useAppSate.setShowMycart(true);}}>
+             
               <ShoppingCartSharpIcon className="header-icon"/> Cart {" "} <span>0</span>
+             
             </li>
             <li>
               <Dropdown as={NavItem}>

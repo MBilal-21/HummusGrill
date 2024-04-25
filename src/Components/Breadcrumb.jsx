@@ -26,7 +26,6 @@ const Breadcrumbs = () => {
   }, [location]);
 
   let breadcrumbPath = "";
-  console.log(pathnames[1]);
   return (
     showBc && (
       <div className="breadcrumbs">

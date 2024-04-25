@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Col from 'react-bootstrap/Col';
 import menu2 from '../Assets/Items/MenuItems/menuSide1.jpeg'
+import { Appstate } from '../App';
 
 const ItemShow = () => {
+  const useAppState = useContext(Appstate);
   return (
     <Col md={6} sm={6} xs= {12}>
       {/* <!-- Box Start --> */}
@@ -18,7 +20,7 @@ const ItemShow = () => {
             (vegan, vegetarian, gluten-Free).Pita bread is not gluten free
           </span>
           <div className="price">$6.99</div>
-          <button type="button" /* data-toggle="modal"data-target="#model_category_10" */  className="btn  dish-btn">
+          <button type="button"  className="btn  dish-btn" onClick={()=> {useAppState.setShowAddToCart(true)}}>
             Add To Cart
           </button>
         </div>

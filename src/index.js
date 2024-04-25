@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './Styling/index.css';
-import './Styling/mediaquery.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { StrictMode } from 'react';
+import React, { StrictMode } from "react";
+import ReactDOM from "react-dom/client";
+import "./Styling/index.css";
+import "./Styling/mediaquery.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </StrictMode>
 );
 

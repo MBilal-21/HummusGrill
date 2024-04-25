@@ -10,6 +10,7 @@ import Container from "react-bootstrap/Container";
 import Dishes from "./Dishes";
 import { Link } from "react-router-dom";
 import OurMenu from "./OurMenu";
+import Newsletter from "../Newsletter";
 
 const Home = () => {
   return (
@@ -64,6 +65,7 @@ const Home = () => {
       </div>
       <Dishes />
       <OurMenu/>
+      <Newsletter/>
     </>
   );
 };

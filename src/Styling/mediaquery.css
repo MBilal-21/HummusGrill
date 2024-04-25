@@ -71,4 +71,31 @@ xxl ≥1400px */
 
 @media screen and (width>=768px) {}
 
-@media screen and (width>=576px) {}
+@media screen and (width>=576px) {
+    /* ----------------newsletter----------------------- */
+    
+    .newsletter .news-div-1, .newsletter .news-div-2 form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 20px;
+      }
+      .newsletter .news-div-1, .newsletter .news-div-2 form div{
+        flex-grow: 1;
+      }
+     
+      .newsletter .news-div-2 .btn{
+        width:100px !important;
+        height: 60px;
+        margin-top: 0px;
+    }
+      
+    .newsletter .news-div-1 p{
+        border-left: 2px solid white;
+        padding: 10px;
+        margin: 0;
+    }
+    /* ----------------newsletter END----------------------- */
+}
