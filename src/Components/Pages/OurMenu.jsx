@@ -9,6 +9,7 @@ const OurMenu = () => {
   const executeScroll = () => scrollref.current.scrollIntoView();
   
   useEffect(()=>{
+    console.log(scrollref.current);
     if(location.pathname === "/menu"){executeScroll()}
   },[location])
 
@@ -16,7 +17,7 @@ const OurMenu = () => {
   return (
     <Container className="ourMenu" id="ourMenu"  ref={scrollref}>
       <div className=" text-center">
-        <hr />
+        <hr className="theline"/>
         <h4>Our Menu</h4>
         <Divider />
         <p>Come and try us, we promise you will not be disappointed!</p>

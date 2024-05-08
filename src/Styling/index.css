@@ -304,6 +304,13 @@ footer .contact li:hover,
 }
 
 /*------------------------- Our Menu Item----------------------------*/
+.theline{
+  opacity: 1;
+  border-top: 2px solid var(--first-color);
+  width: 60%;
+  margin: 20px auto;
+
+}
  .menu-box{
   text-align: center;
   border: 1px solid white;
@@ -402,3 +409,8 @@ footer .contact li:hover,
   right: 0;
   bottom: 0;
 }
+
+
+/* loyality program page
+online payement 
+payement at store */

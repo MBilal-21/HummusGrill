@@ -8,9 +8,10 @@ import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Dishes from "./Dishes";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import OurMenu from "./OurMenu";
 import Newsletter from "../Newsletter";
+import SignatureWrap from "../SignatureWrap";
 
 const Home = () => {
   return (
@@ -63,7 +64,11 @@ const Home = () => {
           </a>
         </Container>
       </div>
+      {/* Button + images create bowl and wrap and signature wrap */}
       <Dishes />
+      {/* Signature wrap items */}
+      <SignatureWrap/>
+      {/* our menu section */}
       <OurMenu/>
       <Newsletter/>
     </>

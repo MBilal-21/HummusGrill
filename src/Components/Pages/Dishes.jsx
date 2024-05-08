@@ -39,9 +39,9 @@ const Dishes = () => {
           <Divider/>
           <p>Create your Meal to fit your taste.</p>
         </div>
-        <Dish link={"create-bowl"} img={createBowl} btn={"Craete a Bowl"} />
-        <Dish link={"create-bowl"} img={createWrap} btn={"Craete a Wrap"} />
-        <Dish link={"create-bowl"} img={signatureWrap} btn={"Signature Wraps"} />
+        <Dish link={"/create-bowl"} img={createBowl} btn={"Craete a Bowl"} />
+        <Dish link={"/create-wrap"} img={createWrap} btn={"Craete a Wrap"} />
+        <Dish link={"/signature-wrap"} img={signatureWrap} btn={"Signature Wraps"} />
       </Row>
     </Container>
   );

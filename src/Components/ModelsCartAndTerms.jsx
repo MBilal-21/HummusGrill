@@ -33,10 +33,8 @@ function Mycart() {
   );
 }
 function AddToCart() {
-  // const [show, setShow] = useState(false);
   const [noofItem, setnoofItem] = useState(0);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  
   const useAppState = useContext(Appstate);
   const handleClose = () => useAppState.setShowAddToCart(false);
 
