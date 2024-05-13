@@ -5,7 +5,7 @@ import signatureWrap from "../../Assets/signatureWrap.png";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
-import Divider from "../Divider";
+import SectionHeader from "../SectionHeader";
 
 const Dish = (props) => {
   return (
@@ -34,11 +34,7 @@ const Dishes = () => {
   return (
     <Container>
       <Row className="dishes">
-        <div className="col-sm-12 commontop text-center text-light">
-          <h4>BUILD YOUR OWN MEAL</h4>
-          <Divider/>
-          <p>Create your Meal to fit your taste.</p>
-        </div>
+        <SectionHeader heading={"BUILD YOUR OWN MEAL"} about={"Create your Meal to fit your taste."}/>
         <Dish link={"/create-bowl"} img={createBowl} btn={"Craete a Bowl"} />
         <Dish link={"/create-wrap"} img={createWrap} btn={"Craete a Wrap"} />
         <Dish link={"/signature-wrap"} img={signatureWrap} btn={"Signature Wraps"} />

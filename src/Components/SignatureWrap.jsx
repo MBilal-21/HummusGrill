@@ -1,34 +1,15 @@
-import React ,{ useEffect, useRef, useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React from 'react';
 import Collapse from 'react-bootstrap/Collapse';
 import ItemsMap from './ItemsMap'
 import Container from "react-bootstrap/Container";
-import { useLocation } from 'react-router-dom';
 import Divider from './Divider';
 
-function SignatureWrap() {
-    const [open, setOpen] = useState(false);
-    const location = useLocation();
-    const scrollSignature = useRef(null);
-    const executeScroll = () => {
-        scrollSignature.current.scrollIntoView();
-        console.log(scrollSignature.current);
-    }
-    
-    useEffect(()=>{
-      if(location.pathname === "/signature-wrap"){ 
-        executeScroll();
-        setOpen(true);
-
-      }else{
-        setOpen(false);
-    }
-    },[location])
+function SignatureWrap({open}) {
 
   return (
     <>
     
-      <Container ref={scrollSignature}>
+      <Container>
       <Collapse in={open}  >
         <div id="example-collapse-text"  >
         <div className=" text-center">

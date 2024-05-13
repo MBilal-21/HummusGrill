@@ -1,22 +1,11 @@
-// Importing necessary dependencies and hooks from React
 import React, { useEffect, useState } from "react";
-
-// Importing the Divider component
 import Divider from "../Divider";
-
-// Importing the Container component from react-bootstrap
 import Container from "react-bootstrap/Container";
-// Importing the Link component from react-router-dom
 import { Link } from "react-router-dom";
-// Importing the Form component from react-bootstrap
 import Form from "react-bootstrap/Form";
-// Importing the LockIcon from @mui/icons-material
 import LockIcon from "@mui/icons-material/Lock";
-
-// Importing the EmailIcon from @mui/icons-material
 import EmailIcon from "@mui/icons-material/Email";
 
-// Defining the Login functional component
 const ResetPassword = () => {
   // Initializing state for error and input using useState hook
   const [err, setError] = useState(null);
@@ -25,9 +14,7 @@ const ResetPassword = () => {
   });
 
   // Using useEffect hook to log the input state whenever it changes
-  useEffect(() => {
-    // console.log(input);
-  }, [input]);
+
 
   // Defining the handleChange function to handle input changes
   const handleChange = (e) => {

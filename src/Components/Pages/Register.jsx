@@ -96,6 +96,7 @@ const Register = () => {
                 placeholder="Email"
                 onChange={handleChange}
                 name="email"
+                required
               />
               <EmailIcon className="iconStyle" />
             </Form.Group>

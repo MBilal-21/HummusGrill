@@ -26,20 +26,20 @@ function BasicExample() {
       {/* Upper fixed bar */}
       <div className="top bg-black">
         <Container className="upperFixedBar">
-          <a href="tel:+1240-513-6020" className="link ">
+          <a href="tel:+1240-513-6020" className="link HoverYellow">
             <LocalPhoneIcon className="header-icon" />
             Hotline: 240-513-6020
           </a>
 
           <ul className="d-flex">
-            <li onClick={()=>{ useAppSate.setShowMycart(true);}}>
+            <li onClick={()=>{ useAppSate.setShowMycart(true);}} className="HoverYellow">
              
               <ShoppingCartSharpIcon className="header-icon"/> Cart {" "} <span>0</span>
              
             </li>
             <li>
               <Dropdown as={NavItem}>
-                <Dropdown.Toggle as={NavLink}>
+                <Dropdown.Toggle as={NavLink} className="HoverYellow">
                 <PersonIcon className="header-icon"/>  My Account
                 </Dropdown.Toggle>
                 <Dropdown.Menu>

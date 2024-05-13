@@ -69,7 +69,11 @@ xxl ≥1400px */
     /* menu item end */
 }
 
-@media screen and (width>=768px) {}
+@media screen and (width>=768px) {
+    .btnHome {
+        font-size: 25px !important;
+    }
+}
 
 @media screen and (width>=576px) {
     /* ----------------newsletter----------------------- */
