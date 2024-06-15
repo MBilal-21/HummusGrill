@@ -1,3 +1,4 @@
+/* ------------Start commmon style-------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
@@ -7,11 +8,6 @@
   margin: 0;
   font-family: "Lato", sans-serif;
 }
-/* remove it  .upperFixedBar *{*/
-.upperFixedBar *{
-  outline: 2px solid red;
-}
-
 :root {
   --first-color: #f0c713;
   --title-color: hsl(0, 0%, 95%);
@@ -47,7 +43,7 @@ a{
   cursor: pointer;
 }
 .HoverYellow:hover{
-  color: var(--first-color);
+  color: var(--first-color) !important;
 }
 
 
@@ -453,16 +449,21 @@ footer .contact li:hover,
 /* ------------------------ */
 /* -------------Add to Bag card of create bowl and wrap----------- */
 
+
 .createBag{
+  min-height: 100px;
+  height: 280px;
+  overflow-y: auto;
   background: var(--body-color);
   padding: 5px 20px;
   position: fixed;
-  bottom: 20px;
+  bottom: 0px;
   left: 0;
   right: 0;
   z-index: 100;
   box-shadow: 0px 0px 4px 1px yellow;
 }
+
 .createBag h4{
   border-bottom:  2px  solid white;
 }
@@ -479,6 +480,22 @@ footer .contact li:hover,
 }
 .createBag button{
   width: 100%;
+}
+/*  */
+.selected-item-list ul li{ 
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid white;
+padding: 10px 0;
+}
+.remove-item-icon{
+  cursor: pointer;
+  border: 2px solid var(--first-color);
+  border-radius: 15px;
+}
+.remove-item-icon:hover{
+  background: var(--first-color);
 }
 /*end create bowl and create wrap  */
 /*------------------------- register and login style ----------------------------*/
@@ -547,7 +564,10 @@ footer .contact li:hover,
   right: 0;
   bottom: 0;
 }
-
+/* --------------------checkOutRows--------------- */
+.checkOutRows{
+  border-bottom: 1px solid grey;
+}
 
 /* loyality program page
 online payement 

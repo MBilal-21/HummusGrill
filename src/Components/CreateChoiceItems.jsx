@@ -4,11 +4,11 @@ import { CreateItems , AddSkipItems } from './ItemShow';
 const CreateChoiceItems = () => {
   return (
     <div>
-      <div className="col-md-10 col-xs-12">
+      <div className="col-md-9 col-xs-12">
 
       <SectionHeader heading={"Choose A Base"} />
       </div>
-      <div className="col-md-10 col-xs-12">
+      <div className="col-md-9 col-xs-12">
       <div className="row xs-text-center">
         <CreateItems />
         <CreateItems />

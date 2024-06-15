@@ -21,7 +21,10 @@ const Dish = (props) => {
           ></div>
         </Link>
         <div className="build-overlay">
-          <Link to={props.link} className="btn link btn-theme btn-wide dish-btn">
+          <Link
+            to={props.link}
+            className="btn link btn-theme btn-wide dish-btn"
+          >
             {" "}
             {props.btn}
           </Link>
@@ -34,7 +37,10 @@ const Dishes = () => {
   return (
     <Container>
       <Row className="dishes">
-        <SectionHeader heading={"BUILD YOUR OWN MEAL"} about={"Create your Meal to fit your taste."}/>
+        <SectionHeader
+          heading={"BUILD YOUR OWN MEAL"}
+          about={"Create your Meal to fit your taste."}
+        />
         <Dish link={"/create-bowl"} img={createBowl} btn={"Craete a Bowl"} />
         <Dish link={"/create-wrap"} img={createWrap} btn={"Craete a Wrap"} />
         <Dish link={"/signature-wrap"} img={signatureWrap} btn={"Signature Wraps"} />
@@ -42,6 +48,5 @@ const Dishes = () => {
     </Container>
   );
 };
-
 
 export default Dishes;

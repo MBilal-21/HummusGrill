@@ -5,7 +5,7 @@ import { Appstate } from "../App";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 
-const ItemShow = () => {
+const ItemShow = ({item}) => {
   const useAppState = useContext(Appstate);
   return (
     <Col md={6} sm={6} xs={12}>
@@ -19,18 +19,21 @@ const ItemShow = () => {
           />
         </div>
         <div className="caption">
-          <h4>Classic Hummus with pita bread</h4>
+          {/* item name */}
+          <h4>{item.name}</h4>
+          {/* item about */}
           <span>
-            Hummus is a dip or spread made from cooked mashed chickpeas and
-            tahini. Our creamy hummus is made daily using fresh ingredients.
-            (vegan, vegetarian, gluten-Free).Pita bread is not gluten free
+           {item.about ? item.about : "No description available"}
           </span>
-          <div className="price">$6.99</div>
+          {/* item price */}
+          <div className="price">{item.price ? "$"+item.price : ""}</div>
+
           <button
             type="button"
             className="btn  dish-btn"
             onClick={() => {
               useAppState.setShowAddToCart(true);
+              useAppState.setAddToCart(item);
             }}
           >
             Add To Cart
@@ -52,10 +55,10 @@ const CreateItems = () => {
   }, [clickStyle]);
   // Get the items from app state to display
   return (
-    <Col md={6} sm={6} xs={12} onClick={() => setClickStyle(!clickStyle)}>
+    <Col lg={6} sm={12} xs={12} onClick={() => setClickStyle(!clickStyle)}>
       {/* <!-- Box Start --> */}
-      <div className="menu-box" ref={box} style={{ cursor: "pointer" }}>
-        <div className="image">
+      <div className="menu-box d-flex" ref={box} style={{ cursor: "pointer" }}>
+        <div className="image" style={{flex:"0 0 140px"}}>
           <img
             src={menu2}
             alt="Classic Hummus with pita bread"

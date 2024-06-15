@@ -73,6 +73,25 @@ xxl ≥1400px */
     .btnHome {
         font-size: 25px !important;
     }
+
+
+    /* .createBag */
+    .createBag{
+        position: fixed;
+        max-width:  280px;
+        top: 270px;
+        right: 0%;
+        left: 100%;
+        margin-left: -280px;
+        padding: 10px;
+        height: 400px;
+        
+    }
+    .createBag .stick{
+  position: sticky;
+  top: 0;
+  background: var(--body-color);
+}
 }
 
 @media screen and (width>=576px) {

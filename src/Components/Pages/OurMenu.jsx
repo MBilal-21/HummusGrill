@@ -1,9 +1,10 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Divider from "../Divider";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ItemsMap from "../ItemsMap";
 const OurMenu = () => {
+  const [searchParam, setSearchParam] = useSearchParams({});
   
   return (
     <Container className="ourMenu" id="ourMenu" >

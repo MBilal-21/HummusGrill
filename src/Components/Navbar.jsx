@@ -40,7 +40,7 @@ function BasicExample() {
             <li>
               <Dropdown as={NavItem}>
                 <Dropdown.Toggle as={NavLink} className="HoverYellow">
-                <PersonIcon className="header-icon"/>  My Account
+                <PersonIcon className="header-icon " />  My Account
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {show ? (
@@ -62,7 +62,7 @@ function BasicExample() {
               </Dropdown>
             </li>
             <li>
-              <FacebookOutlinedIcon className="header-icon"/>
+              <FacebookOutlinedIcon className="header-icon HoverYellow"/>
             </li>
           </ul>
         </Container>

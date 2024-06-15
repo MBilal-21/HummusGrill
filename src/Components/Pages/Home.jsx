@@ -18,12 +18,18 @@ const Home = () => {
   const location = useLocation();
   const scrollref = useRef(null);
   const executeScroll = () => scrollref.current.scrollIntoView();
-  
-  useEffect(()=>{
-    if(location.pathname.startsWith("/menu") || location.pathname.startsWith("/signature-wrap") ){executeScroll()}
-    location.pathname.startsWith("/signature-wrap")?setOpenSignature(true):setOpenSignature(false);
-  },[location])
 
+  useEffect(() => {
+    if (
+      location.pathname.startsWith("/menu") ||
+      location.pathname.startsWith("/signature-wrap")
+    ) {
+      executeScroll();
+    }
+    location.pathname.startsWith("/signature-wrap")
+      ? setOpenSignature(true)
+      : setOpenSignature(false);
+  }, [location]);
 
   return (
     <>
@@ -77,12 +83,12 @@ const Home = () => {
       </div>
       {/* Button + images create bowl and wrap and signature wrap */}
       <Dishes />
-      <div  ref={scrollref}></div>
+      <div ref={scrollref}></div>
       {/* Signature wrap items */}
-      <SignatureWrap  open={openSignature}/>
+      <SignatureWrap open={openSignature} />
       {/* our menu section */}
-      <OurMenu/>
-      <Newsletter/>
+      <OurMenu />
+      <Newsletter />
     </>
   );
 };

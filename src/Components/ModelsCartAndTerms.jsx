@@ -37,7 +37,7 @@ function AddToCart() {
   
   const useAppState = useContext(Appstate);
   const handleClose = () => useAppState.setShowAddToCart(false);
-
+ const item = useAppState.AddToCart;
 
   return (
     <>
@@ -51,14 +51,14 @@ function AddToCart() {
           </div>
        
           <div className="text-light bg-black px-3 d-flex  justify-content-between align-items-center my-2">
-            <h4>Name of Item</h4>
-            <span>$Price</span>
+            <h4>{item.name}</h4>
+            <span>${item.price}</span>
           </div>
           <hr />
           <div className="d-flex justify-content-between align-items-center px-3" >
-            <button><RemoveIcon/></button>
+            <button onClick={()=>setnoofItem(noofItem-1)}><RemoveIcon/></button>
            <span>{noofItem}</span>
-            <button><AddIcon/></button>
+            <button onClick={()=>setnoofItem(noofItem+1)}><AddIcon/></button>
           </div>
         </Modal.Body>
         <Modal.Footer>

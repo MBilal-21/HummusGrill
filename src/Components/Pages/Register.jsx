@@ -9,12 +9,9 @@ import LockIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/Email";
 import HomeIcon from "@mui/icons-material/Home";
 import InputMask from "react-input-mask";
-import {TermsAndCondition} from '../ModelsCartAndTerms'
+import { TermsAndCondition } from "../ModelsCartAndTerms";
 
 import Button from "react-bootstrap/Button";
-
-
-
 
 const Register = () => {
   const [showTerms, setShowTerms] = useState(false);
@@ -33,9 +30,7 @@ const Register = () => {
     promoMsg: "", // Changed promo-msg to promoMsg
     agreeTerms: false, // Added agreeTerms field
   });
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
