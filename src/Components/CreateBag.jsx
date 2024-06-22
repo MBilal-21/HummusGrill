@@ -60,6 +60,60 @@ const CreateBag = () => {
             
             <ClearIcon className="remove-item-icon"/>
           </li>
+          <li className="my-1 w-100">
+          
+              <div className="d-flex">
+              <img
+                src={menu2}
+                alt=""
+                width={80}
+                height={80}
+                style={{ objectFit: "fill" }}
+              />
+              <div className="ms-2">
+                <div>Item name</div>
+                <div>price</div>
+              </div>
+              </div>
+            
+            <ClearIcon className="remove-item-icon"/>
+          </li>
+          <li className="my-1 w-100">
+          
+              <div className="d-flex">
+              <img
+                src={menu2}
+                alt=""
+                width={80}
+                height={80}
+                style={{ objectFit: "fill" }}
+              />
+              <div className="ms-2">
+                <div>Item name</div>
+                <div>price</div>
+              </div>
+              </div>
+            
+            <ClearIcon className="remove-item-icon"/>
+          </li>
+          <li className="my-1 w-100">
+          
+              <div className="d-flex">
+              <img
+                src={menu2}
+                alt=""
+                width={80}
+                height={80}
+                style={{ objectFit: "fill" }}
+              />
+              <div className="ms-2">
+                <div>Item name</div>
+                <div>price</div>
+              </div>
+              </div>
+            
+            <ClearIcon className="remove-item-icon"/>
+          </li>
         </ul>
       </div>
     </div>

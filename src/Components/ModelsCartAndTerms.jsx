@@ -1,71 +1,168 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "react-bootstrap/Modal";
 import Divider from "./Divider";
-import addtoCartImage from '../Assets/Items/MenuItems/menuDesserts1.jpg';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import addtoCartImage from "../Assets/Items/MenuItems/menuDesserts1.jpg";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { Appstate } from "../App";
+import { Link } from "react-router-dom";
+
+const increDecrement = (number, setNumber, operater) => {
+  if (operater === "-") {
+    if (number > 1) setNumber(number - 1);
+  }
+  if (operater === "+") {
+    setNumber(number + 1);
+  }
+};
+
+// My Cart component start
 
 function Mycart() {
-  
+  const [quantity, setQuantity] = useState(1);
   const useAppState = useContext(Appstate);
+  const cartItems = useAppState.cartItems;
   const handleClose = () => useAppState.setShowMycart(false);
+
   return (
     <>
-      <Modal show={useAppState.showMycart} onHide={handleClose} className="Mycart text-black" >
-        <Modal.Header closeButton>
-          <Modal.Title>My Cart</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Woohoo, you're reading this text in a centered modal!
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Offcanvas
+        show={useAppState.showMycart}
+        onHide={handleClose}
+        placement="end"
+        className="Mycart"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>My Cart</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {cartItems.length !== 0 ? (
+            "Cart is Empty"
+          ) : (
+            <>
+            {/* -----------start wrap items----------------------- */}
+            <div className="wrap-one">
+              <h2>
+                {"Hummus grill"}{" "}
+                <span>
+                  <small> {"(span text)"}</small>
+                </span>{" "}
+              </h2>
+
+              <div className="price">
+                <span>{"price"}</span>
+                <span>{"(Quantity)"}</span>
+              </div>
+              <ul className="itemsList p-0 mt-2">
+                <li>{"Tabbouleh, Garlic Sauce, Classic Hummus, Tomatoes, Cucumbers, Pickled Red Cabbage, Ezme, Harrisa Sauce, Shug Sauce,"}</li>
+               <li>
+                <strong>Special instructions: </strong>
+                <span>testing</span>
+               </li>
+              </ul>
+            {/* increament and decreament */}
+            <hr className="my-2"/>
+            <div className="d-flex justify-content-between align-items-center px-3">
+            <button className="btn-circle d-flex" onClick={() => increDecrement(quantity, setQuantity, "-")}>
+              <RemoveIcon style={{fontSize:"25px"}}/>
+            </button>
+            <span>{quantity}</span>
+            <button className="btn-circle d-flex" onClick={() => increDecrement(quantity, setQuantity, "+")}>
+              <AddIcon style={{fontSize:"25px"}}/>
+            </button>
+          </div>
+            {/* button remove change and update */}
+            <hr className="my-2"/>
+              <div className="row my-2">
+                <div className="col-6 px-1"><button className="btn dish-btn w-100 ">Remove</button></div>
+                {/* <div className="col-6 px-1"><button className="btn dish-btn w-100">Update</button></div> */}
+                <div className="col-6 px-1"><button className="btn dish-btn w-100">Change</button></div>
+              </div>
+            </div>
+            <hr />
+            {/* ------------------------end wrap items----------------------------- */}
+           
+           
+       
+            {/* check out button addmore clear bag */}
+            <div className="cart-foot-btn">
+             <Link to={"/cart"}> <button className="btn cartbtn">Go To Checkout {"$375"}</button></Link>
+             <Link to={"/"}> <button className="btn cartbtn">Add More items</button></Link>
+             <Link > <button className="btn cartbtn">Clear Bag</button></Link>
+            </div>
+            </>
+          )}
+        </Offcanvas.Body>
+        
+      </Offcanvas>
     </>
   );
 }
+
+// My Cart component end
+
+// --------------------------------Next component---------------------------------------------------------
+
+// Add to cart button component start
 function AddToCart() {
-  const [noofItem, setnoofItem] = useState(0);
-  
+  const [quantity, setQuantity] = useState(1);
   const useAppState = useContext(Appstate);
   const handleClose = () => useAppState.setShowAddToCart(false);
- const item = useAppState.AddToCart;
-
+  const item = useAppState.AddToCartItem;
+  // !keep editing
+  const [addItem, setAddItem] = useState({
+    name: "",
+    price: 0,
+    addIngrediant: "",
+    quantite: 0,
+    specialInstruct: "",
+  });
+  useEffect(() => {
+    setQuantity(1);
+  }, []);
+  const funcToAddInCart = () => {};
   return (
     <>
-      <Modal show={useAppState.showAddToCart} onHide={handleClose} centered className="text-black text-center">
+      <Modal
+        show={useAppState.showAddToCart}
+        onHide={handleClose}
+        centered
+        className="text-black text-center"
+      >
         <Modal.Header closeButton>
           {/* <Modal.Title>Modal heading</Modal.Title> */}
         </Modal.Header>
         <Modal.Body className="px-0">
           <div>
-          <img src={addtoCartImage} alt="image To add in cart" width={120}/>
+            <img src={addtoCartImage} alt=" To add in cart" width={120} />
           </div>
-       
+
           <div className="text-light bg-black px-3 d-flex  justify-content-between align-items-center my-2">
             <h4>{item.name}</h4>
             <span>${item.price}</span>
           </div>
           <hr />
-          <div className="d-flex justify-content-between align-items-center px-3" >
-            <button onClick={()=>setnoofItem(noofItem-1)}><RemoveIcon/></button>
-           <span>{noofItem}</span>
-            <button onClick={()=>setnoofItem(noofItem+1)}><AddIcon/></button>
+          <div className="d-flex justify-content-between align-items-center px-3">
+            <button onClick={() => increDecrement(quantity, setQuantity, "-")}>
+              <RemoveIcon />
+            </button>
+            <span>{quantity}</span>
+            <button onClick={() => increDecrement(quantity, setQuantity, "+")}>
+              <AddIcon />
+            </button>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <button type="button"  className="btn  dish-btn">
+          <button
+            type="button"
+            className="btn  dish-btn"
+            onClick={funcToAddInCart}
+          >
             Add To Cart
           </button>
         </Modal.Footer>
@@ -73,6 +170,9 @@ function AddToCart() {
     </>
   );
 }
+// Add to cart component  end
+
+// Terms And Condition component  start
 
 function TermsAndCondition({ show, setShow }) {
   const handleClose = () => setShow(false);
@@ -181,6 +281,7 @@ function TermsAndCondition({ show, setShow }) {
     </>
   );
 }
+// Terms And Condition component  end
 
 export default Mycart;
 export { TermsAndCondition, AddToCart };

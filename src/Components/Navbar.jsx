@@ -54,8 +54,12 @@ function BasicExample() {
                     </>
                   ) : (
                     <>
-                      <Dropdown.Item>Dashboard</Dropdown.Item>
-                      <Dropdown.Item>LogOut</Dropdown.Item>
+                       <Link to={"dashboard"} className="dropdown-item">
+                        Dashboard
+                      </Link>
+                      <Link to={"logout"} className="dropdown-item">
+                        Logout
+                      </Link>
                     </>
                   )}
                 </Dropdown.Menu>
@@ -117,7 +121,7 @@ function BasicExample() {
                 <Link to="/signature-wrap" className="nav-link">
                   SIGNATURE WRAPS
                 </Link>
-                <Link to="/order-history" className="nav-link">
+                <Link to="/dashboard?q=ordered-history" className="nav-link">
                   ORDER HISTORY
                 </Link>
                 <Link to="about" className="nav-link">

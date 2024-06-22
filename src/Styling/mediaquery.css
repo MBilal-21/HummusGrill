@@ -1,12 +1,14 @@
-/* xs <576px 
-sm ≥576px	
-md ≥768px	
-lg ≥992px	
+/* 
+xxl ≥1400px 
 xl ≥1200px	
-xxl ≥1400px */
+lg ≥992px	
+md ≥768px	
+sm ≥576px	
+xs <576px 
+*/
 @media screen and (width>=992px) {
 
-    /* header */
+    /*------------------ header ----------------*/
     header {
         position: absolute !important;
     }
@@ -14,7 +16,8 @@ xxl ≥1400px */
     .upperFixedBar {
         font-size: 14px !important;
     }
-    .header-icon{
+
+    .header-icon {
         font-size: 20px !important;
     }
 
@@ -22,20 +25,13 @@ xxl ≥1400px */
         flex: 0;
     }
 
-    /* breadcrumbs */
+    /*---------------- breadcrumbs -------------*/
     .breadcrumbs {
         margin-top: 150px;
     }
 
-    /* menu item start */
-    .menu-box {
-        display: flex;
-        padding-right: 20px;
-    }
-
-    .image {
-        flex: 0 0 200px;
-    }
+    /*-------------------- menu item start ----------------------------*/
+    
 
     .caption {
         display: flex;
@@ -52,7 +48,6 @@ xxl ≥1400px */
     .caption span {
         flex: 0 0 100%;
         order: 3;
-        /* text-align: justify; */
     }
 
     .caption .price {
@@ -66,7 +61,21 @@ xxl ≥1400px */
         margin-left: auto;
     }
 
-    /* menu item end */
+    /*---------------------- menu item end--------------------- */
+    /*---------------------------- create bag -------------------*/
+    .createBag {
+        max-width: 300px;
+        margin-left: -300px;
+    }
+
+    /*------------------------- checkout --------------------------- */
+    .display-orderForm {
+        display: block;
+    }
+
+    .display-1-6-col {
+        display: none;
+    }
 }
 
 @media screen and (width>=768px) {
@@ -75,50 +84,89 @@ xxl ≥1400px */
     }
 
 
-    /* .createBag */
-    .createBag{
+    /*-------------------------- .createBag--------------------------- */
+    .createBag {
         position: fixed;
-        max-width:  280px;
-        top: 270px;
+        max-width: 250px;
+        top: 240px;
         right: 0%;
         left: 100%;
-        margin-left: -280px;
+        margin-left: -250px;
         padding: 10px;
         height: 400px;
-        
+
     }
-    .createBag .stick{
-  position: sticky;
-  top: 0;
-  background: var(--body-color);
-}
+
+    .createBag .stick {
+        position: sticky;
+        top: 0;
+        background: var(--body-color);
+    }
+
+    .selected-item-list {
+        min-height: 100px;
+        height: 200px;
+        overflow-y: auto;
+    }
+
+    /*--------------- dashboard ------------------*/
+    .userInfo {
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .userInfo .media {
+        text-align: start;
+    }
+
+
 }
 
 @media screen and (width>=576px) {
     /* ----------------newsletter----------------------- */
-    
-    .newsletter .news-div-1, .newsletter .news-div-2 form{
+
+    .newsletter .news-div-1,
+    .newsletter .news-div-2 form {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 20px;
-      }
-      .newsletter .news-div-1, .newsletter .news-div-2 form div{
+    }
+
+    .newsletter .news-div-1,
+    .newsletter .news-div-2 form div {
         flex-grow: 1;
-      }
-     
-      .newsletter .news-div-2 .btn{
-        width:100px !important;
+    }
+
+    .newsletter .news-div-2 .btn {
+        width: 100px !important;
         height: 60px;
         margin-top: 0px;
     }
-      
-    .newsletter .news-div-1 p{
+
+    .newsletter .news-div-1 p {
         border-left: 2px solid white;
         padding: 10px;
         margin: 0;
     }
+
     /* ----------------newsletter END----------------------- */
+
+    /* -------------------- checkOut --------------- */
+    .SummaryTable tbody tr {
+        font-size: 14px;
+    }
+
+    .SummaryTable tbody tr .name {
+        font-weight: 600;
+        padding: .5rem;
+    }
+    .cart-foot-btn{
+        flex-direction: row;
+      }
+
 }

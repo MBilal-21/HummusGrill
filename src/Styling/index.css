@@ -17,6 +17,19 @@
   --second-font: "Great Vibes", cursive;
   --small-font-size: 14px;
 }
+/* scroll bar start */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #f0c713;
+  outline: 1px solid slategrey;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+/* scroll bar end */
 html {
   scroll-behavior: smooth;
 }
@@ -46,7 +59,14 @@ a{
   color: var(--first-color) !important;
 }
 
-
+.c-w_Bg-Y{
+  color: white !important;
+  background-color: var(--first-color) !important;
+}
+.c-Y_Bg-w{
+  color: var(--first-color) !important;
+  background-color: white !important;
+}
 
 
 .btn-theme {
@@ -94,7 +114,16 @@ a{
   background: white !important;
   color: var(--first-color) !important;
 }
-
+.btn-circle{
+  cursor: pointer;
+  border: 2px solid var(--first-color);
+  border-radius: 50% ;
+  padding: 2px;
+  background: none;
+}
+.btn-circle:hover{
+  background: var(--first-color) ;
+}
 
 .container-bg-clr{
   background-color: var(--first-color);
@@ -189,6 +218,7 @@ header .menu-link {
 
 .homeImageSlides {
   filter: brightness(0.5);
+  min-height: 190px;
 }
 
 .homeTextContainer {
@@ -242,6 +272,9 @@ footer .contact li:hover,
   justify-content: center !important;
   padding: 40px 0;
 }
+/* .dishes h4{
+  font-size: 24px;
+} */
 .divider{
   display: flex;
   align-items: center;
@@ -302,7 +335,7 @@ footer .contact li:hover,
   font-size: 36px;
   font-weight: 400;
   text-transform: capitalize;
-  margin: 50px 0 10px;
+  margin: 30px 0 10px;
   text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.9);
 }
 .about .commontop h4{
@@ -349,7 +382,7 @@ footer .contact li:hover,
  .menu-box{
   text-align: center;
   border: 1px solid white;
-  padding:10px 20px ;
+  padding:10px 10px 10px 5px;
   margin:10px 0;
 }
  .menu-box:hover {
@@ -357,8 +390,8 @@ footer .contact li:hover,
 
 }
  .menu-box .image{
-  width: 130px;
-  height: 130px;
+  /*! width: auto; */
+  /*! margin: 0; */
   margin: auto;
 }
 .menu-box .image img{
@@ -482,6 +515,7 @@ footer .contact li:hover,
   width: 100%;
 }
 /*  */
+
 .selected-item-list ul li{ 
 display: flex;
 justify-content: space-between;
@@ -551,10 +585,11 @@ padding: 10px 0;
 
 
 /* ------------------------modal-header------------------------- */
-.modal-header .btn-close{
+.Mycart .btn-close, .modal-header .btn-close{
   background-color: #f0c713;
 }
 /* my cart modal-dialog  */
+
 .Mycart .modal-dialog .modal-content{
   height: 100%;
 }
@@ -564,11 +599,127 @@ padding: 10px 0;
   right: 0;
   bottom: 0;
 }
-/* --------------------checkOutRows--------------- */
-.checkOutRows{
-  border-bottom: 1px solid grey;
+.wrap-one h2{
+  font-size: 20px;
+}
+.wrap-one .price{
+  font-size: 14px;
+}
+.wrap-one .price span:first-child{
+  margin-right: 10px;
+}
+.wrap-one .price span:last-child{
+  color: var(--first-color);
+}
+.cart-foot-btn{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 3px;
+}
+.cartbtn {
+  background: white !important;
+  border: 1px solid var(--first-color) !important;
+  color: var(--first-color) !important;
+  border-radius: 5px !important;
+  transition: all 0.5s ease-in !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 10px !important;
+  margin-bottom: 5px;
+  
 }
 
+.cartbtn:hover {
+  background: var(--first-color) !important;
+  color: var(--text-color) !important;
+}
+/* -------------------- checkOut --------------- */
+.checkOutRows{
+  padding: 20px;
+  border-bottom: 1px solid grey;
+}
+.SummaryTable thead tr td{
+  background: #f1f1f1;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #000;
+}
+.SummaryTable tbody tr .btn-close{
+ border-radius: 5px;
+ background-color: #17A2B8;
+ padding: 10px;
+ cursor: pointer;
+ margin: auto;
+}
+.SummaryTable tbody tr{
+  font-size: small;
+}
+.SummaryTable tbody tr .name{
+  padding:.5rem 0;
+}
+.display-orderForm{
+  display: none;
+}
+
+/* --------------dashboard--------------------- */
+.dashboard{
+  background: #efeded;
+}
+.dashTab{
+  padding: 0%;
+}
+.dashTab li .tab{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  color: black;
+  width: 100%;
+  height: 80px;
+  align-items: center;
+  text-decoration: none;
+  border: 1px solid #efeded;
+}
+.dashTab li .tab:hover{
+  background: var(--first-color);
+  color: white;
+}
+.dashTab li .active{
+  background: var(--first-color);
+  color: white;
+}
+.changePass, .userInfo ,.personalInfo {
+  border: 1px solid #efeded;
+  border-radius: 0px 0px 5px 5px;
+  background: white;
+  padding:20px 10px ;
+}
+.overview h5{
+  border: 1px solid #efeded;
+  border-radius: 5px 5px 0px 0px;
+  background: #757575a8;
+  margin:  0px;
+  padding: 10px;
+}
+.userInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.userInfo img{
+  border-radius: 10px;
+}
+.userInfo .media{
+  text-align: center;
+}
+.passError, .profileError{
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
 /* loyality program page
 online payement 
 payement at store */

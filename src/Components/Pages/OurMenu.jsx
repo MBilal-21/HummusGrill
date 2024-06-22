@@ -1,83 +1,124 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Divider from "../Divider";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ItemsMap from "../ItemsMap";
+import { ItemList } from "../../itemsList/items";
 const OurMenu = () => {
-  const [searchParam, setSearchParam] = useSearchParams({});
-  
+  const MenuItems = ItemList[0].Menu;
+  const [NewItems, setNewItems] = useState(MenuItems);
+  const m1 = useRef();
+  const m2 = useRef();
+  const m3 = useRef();
+  const m4 = useRef();
+
+  const searchMenu = (sm) => {
+    let newItemList = [];
+    MenuItems.forEach((element) => {
+      if (element.category === sm) newItemList.push(element);
+    });
+    setNewItems(newItemList);
+  };
+  const menuSearch = useLocation().search;
+  useEffect(() => {
+   
+    const ms = menuSearch.split("=")[1];
+    m1.current.classList.add("c-w_Bg-Y");
+    m2.current.classList.add("c-w_Bg-Y");
+    m3.current.classList.add("c-w_Bg-Y");
+    m4.current.classList.add("c-w_Bg-Y");
+    switch (ms) {
+      case "side":{
+        searchMenu("side");
+        m1.current.classList.add("c-Y_Bg-w");
+        m1.current.classList.remove("c-w_Bg-Y");
+        m2.current.classList.remove("c-Y_Bg-w");
+        m3.current.classList.remove("c-Y_Bg-w");
+        m4.current.classList.remove("c-Y_Bg-w");
+        break;
+      }
+      case "deserts":{
+        searchMenu("deserts");
+        m4.current.classList.add("c-Y_Bg-w");
+        m4.current.classList.remove("c-w_Bg-Y");
+        m1.current.classList.remove("c-Y_Bg-w");
+        m3.current.classList.remove("c-Y_Bg-w");
+        m2.current.classList.remove("c-Y_Bg-w");
+        break;
+      }
+      case "kidsMenu":{
+        searchMenu("kidsMenu");
+        m2.current.classList.add("c-Y_Bg-w");
+        m2.current.classList.remove("c-w_Bg-Y");
+        m1.current.classList.remove("c-Y_Bg-w");
+        m3.current.classList.remove("c-Y_Bg-w");
+        m4.current.classList.remove("c-Y_Bg-w");
+        break;
+      }
+      case "drinks":{
+        searchMenu("drinks");
+        m3.current.classList.add("c-Y_Bg-w");
+        m3.current.classList.remove("c-w_Bg-Y");
+        m1.current.classList.remove("c-Y_Bg-w");
+        m2.current.classList.remove("c-Y_Bg-w");
+        m4.current.classList.remove("c-Y_Bg-w");
+        break;
+      }
+
+      default:{
+        searchMenu("side");
+        m1.current.classList.add("c-Y_Bg-w");
+        m1.current.classList.remove("c-w_Bg-Y");
+        m2.current.classList.remove("c-Y_Bg-w");
+        m3.current.classList.remove("c-Y_Bg-w");
+        m4.current.classList.remove("c-Y_Bg-w");
+        break;
+      }
+    }
+   
+  }, [menuSearch]);
+
   return (
-    <Container className="ourMenu" id="ourMenu" >
+    <Container className="ourMenu" id="ourMenu">
       <div className=" text-center">
-        <hr className="theline"/>
+        <hr className="theline" />
         <h4>Our Menu</h4>
         <Divider />
         <p>Come and try us, we promise you will not be disappointed!</p>
       </div>
-      <div>
-        <Link to={`/menu/${"side"}`}><button>SIDE</button></Link>
-        <Link to={`/menu/${"kids-menu"}`}><button>KIDS MENU</button></Link>
-        <Link to={`/menu/${"drinks"}`}><button>DRINKS</button></Link>
-        <Link to={`/menu/${"deserts"}`}><button>DESERTS</button></Link>
+      <div className="text-center m-4">
+        <Link
+          to={"/menu/?search=side"}
+          className="m-2 btn c-w_Bg-Y"
+          ref={m1}
+        >
+          SIDE
+        </Link>
+        <Link
+          to={"/menu/?search=kidsMenu"}
+          className="m-2 btn c-w_Bg-Y"
+          ref={m2}
+        >
+          KIDS MENU
+        </Link>
+        <Link
+          to={"/menu/?search=drinks"}
+          className="m-2 btn c-w_Bg-Y"
+          ref={m3}
+        >
+          DRINKS
+        </Link>
+        <Link
+          to={"/menu/?search=deserts"}
+          className="m-2 btn c-w_Bg-Y"
+          ref={m4}
+        >
+          DESERTS
+        </Link>
       </div>
-     
-
-
-    <ItemsMap/>
-   
+      <ItemsMap items={NewItems} />
     </Container>
   );
 };
 
 export default OurMenu;
-
-      // <Col md={6} sm={6} xs= {12}>
-      //   {/* <!-- Box Start --> */}
-      //   <div className="menu-box">
-      //     <div className="image">
-      //       <img src={menu2} width={130} alt="Classic Hummus with pita bread" className="img-fluid"/>
-      //     </div>
-      //     <div className="caption">
-      //       <h4>Classic Hummus with pita bread</h4>
-      //       <span>
-      //         Hummus is a dip or spread made from cooked mashed chickpeas and
-      //         tahini. Our creamy hummus is made daily using fresh ingredients.
-      //         (vegan, vegetarian, gluten-Free).Pita bread is not gluten free
-      //       </span>
-      //       <div className="price">$6.99</div>
-      //       {/* <!----------------------add to cart popup condition implement--------------------> */}
-      //       <button type="button" /* data-toggle="modal"data-target="#model_category_10" */  className="btn  dish-btn">
-      //         Add To Cart
-      //       </button>
-      //       {/* <!----------------------add to cart popup condition implement--------------------> */}
-      //     </div>
-      //   </div>
-      //   {/* <!-- Box End --> */}
-      // </Col>
-
-
-      // <div className="row xs-text-center">
-      
-      // <Col md={6} sm={6} xs= {12}>
-      //   {/* <!-- Box Start --> */}
-      //   <div className="menu-box">
-      //     <div className="image">
-      //       <img src={menu2} alt="Classic Hummus with pita bread" className="img-fluid"/>
-      //     </div>
-      //     <div className="caption">
-      //       <h4>Classic Hummus with pita bread</h4>
-      //       <span>
-      //         Hummus is a dip or spread made from cooked mashed chickpeas and
-      //         tahini. Our creamy hummus is made daily using fresh ingredients.
-      //         (vegan, vegetarian, gluten-Free).Pita bread is not gluten free
-      //       </span>
-      //       <div className="price">$6.99</div>
-      //       <button type="button" /* data-toggle="modal"data-target="#model_category_10" */  className="btn  dish-btn">
-      //         Add To Cart
-      //       </button>
-      //     </div>
-      //   </div>
-      //   {/* <!-- Box End --> */}
-      // </Col>
-     
-      // </div>

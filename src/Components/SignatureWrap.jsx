@@ -3,8 +3,10 @@ import Collapse from "react-bootstrap/Collapse";
 import ItemsMap from "./ItemsMap";
 import Container from "react-bootstrap/Container";
 import Divider from "./Divider";
+import { ItemList } from "../itemsList/items";
 
 function SignatureWrap({ open }) {
+  const SignatureItems = ItemList[0].Signature;
   return (
     <>
       <Container>
@@ -16,7 +18,7 @@ function SignatureWrap({ open }) {
               <Divider />
               <p>Come and try us, we promise you will not be disappointed!</p>
             </div>
-            <ItemsMap />
+            <ItemsMap items={SignatureItems}/>
           </div>
         </Collapse>
       </Container>

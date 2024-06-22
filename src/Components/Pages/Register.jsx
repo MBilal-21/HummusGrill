@@ -37,7 +37,7 @@ const Register = () => {
     const newValue = type === "checkbox" ? checked : value;
     setInput((preState) => ({ ...preState, [name]: newValue }));
   };
-
+  
   const handleClick = async (e) => {
     e.preventDefault();
     // Here you can perform form validation and backend logic
@@ -100,7 +100,7 @@ const Register = () => {
                 className="form-control"
                 mask="999 999 9999"
                 maskChar={"_"}
-                placeholder={"123 456 7890"}
+                placeholder={"___ ___ ____"}
                 onChange={handleChange}
                 name="phoneNumber"
                 required

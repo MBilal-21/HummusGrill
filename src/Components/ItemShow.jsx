@@ -4,41 +4,44 @@ import menu2 from "../Assets/Items/MenuItems/menuSide1.jpeg";
 import { Appstate } from "../App";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
+import Row from "react-bootstrap/esm/Row";
 
-const ItemShow = ({item}) => {
+const ItemShow = ({ item }) => {
   const useAppState = useContext(Appstate);
   return (
     <Col md={6} sm={6} xs={12}>
-      {/* <!-- Box Start --> */}
-      <div className="menu-box">
-        <div className="image">
-          <img
-            src={menu2}
-            alt="Classic Hummus with pita bread"
-            className="img-fluid"
-          />
-        </div>
-        <div className="caption">
-          {/* item name */}
-          <h4>{item.name}</h4>
-          {/* item about */}
-          <span>
-           {item.about ? item.about : "No description available"}
-          </span>
-          {/* item price */}
-          <div className="price">{item.price ? "$"+item.price : ""}</div>
+      <div className="px-2">
+        <Row className="menu-box">
+          <Col className="image" xs={12} sm={12} lg={4}>
+            <img
+              src={menu2}
+              alt="Classic Hummus with pita bread"
+              className="img-fluid"
+            />
+          </Col>
 
-          <button
-            type="button"
-            className="btn  dish-btn"
-            onClick={() => {
-              useAppState.setShowAddToCart(true);
-              useAppState.setAddToCart(item);
-            }}
-          >
-            Add To Cart
-          </button>
-        </div>
+          <Col xs={12} sm={12} lg={8} className="caption">
+            {/* item name */}
+            <h4>{item.name ? item.name : "Item Name"}</h4>
+
+            {/* item about */}
+            <span>{item.about ? item.about : "No description available"}</span>
+            {/* item price */}
+            <div className="price">{item.price ? "$" + item.price : ""}</div>
+
+            <button
+              type="button"
+              className="btn  dish-btn align-self-end"
+              style={{ width: "minContent" }}
+              onClick={() => {
+                useAppState.setShowAddToCart(true);
+                useAppState.setAddToCartItem(item);
+              }}
+            >
+              Add To Cart
+            </button>
+          </Col>
+        </Row>
       </div>
       {/* <!-- Box End --> */}
     </Col>
@@ -58,7 +61,7 @@ const CreateItems = () => {
     <Col lg={6} sm={12} xs={12} onClick={() => setClickStyle(!clickStyle)}>
       {/* <!-- Box Start --> */}
       <div className="menu-box d-flex" ref={box} style={{ cursor: "pointer" }}>
-        <div className="image" style={{flex:"0 0 140px"}}>
+        <div className="image" style={{ flex: "0 0 140px" }}>
           <img
             src={menu2}
             alt="Classic Hummus with pita bread"
@@ -80,24 +83,25 @@ const CreateItems = () => {
   );
 };
 
+// --------------------add extra and skip button at create bowl and wrap----------------------
 const AddSkipItems = () => {
   return (
     <Col md={6} sm={6} xs={12}>
       <div className="menu-box skipDiv">
         <div className="d-flex flex-wrap skipDiv-1">
-        <div>
-          <div className="skipDivBtn">
-            <AddIcon className="icon" />
+          <div>
+            <div className="skipDivBtn">
+              <AddIcon className="icon" />
+            </div>
+            <span>Add Extra</span>
           </div>
-          <span>Add Extra</span>
-        </div>
-        <div>
-          <div className="skipDivBtn">
-            <ClearIcon className="icon" />
+          <div>
+            <div className="skipDivBtn">
+              <ClearIcon className="icon" />
+            </div>
+            <span>Skip All</span>
           </div>
-          <span>Skip All</span>
         </div>
-      </div>
       </div>
     </Col>
   );

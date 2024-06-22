@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import Divider from "../Divider";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import LockIcon from "@mui/icons-material/Lock";
 import EmailIcon from "@mui/icons-material/Email";
 
 const ResetPassword = () => {
@@ -72,5 +71,5 @@ const ResetPassword = () => {
   );
 };
 
-// Exporting the Login component
+
 export default ResetPassword;
