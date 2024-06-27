@@ -17,8 +17,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import Breadcrumbs from "./Breadcrumb";
 
 function BasicExample() {
-  const [show, setShow] = useState(true);
-  const useAppSate = useContext(Appstate);
+  const [login, setLogin] = useState(true);
+  const {handleClose, cartItems} = useContext(Appstate);
 
   return (
     <>
@@ -32,9 +32,9 @@ function BasicExample() {
           </a>
 
           <ul className="d-flex">
-            <li onClick={()=>{ useAppSate.setShowMycart(true);}} className="HoverYellow">
+            <li onClick={()=>handleClose('cart')} className="HoverYellow">
              
-              <ShoppingCartSharpIcon className="header-icon"/> Cart {" "} <span>0</span>
+              <ShoppingCartSharpIcon className="header-icon"/> Cart {" "} <span>{cartItems.length}</span>
              
             </li>
             <li>
@@ -43,7 +43,7 @@ function BasicExample() {
                 <PersonIcon className="header-icon " />  My Account
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {show ? (
+                  {!login ? (
                     <>
                       <Link to={"login"} className="dropdown-item">
                         Login
@@ -54,7 +54,7 @@ function BasicExample() {
                     </>
                   ) : (
                     <>
-                       <Link to={"dashboard"} className="dropdown-item">
+                       <Link to={"/dashboard?q=profile"} className="dropdown-item">
                         Dashboard
                       </Link>
                       <Link to={"logout"} className="dropdown-item">

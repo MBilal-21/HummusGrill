@@ -23,7 +23,7 @@
   height: 7px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #f0c713;
+  background-color: var(--first-color);
   outline: 1px solid slategrey;
 }
 ::-webkit-scrollbar-track {
@@ -142,7 +142,7 @@ header {
 
 header .NavBar {
   font-size: 14px !important;
-  border-bottom: 1px solid #f0c713;
+  border-bottom: 1px solid var(--first-color);
 }
 .flex-full{
   flex: 0 0 100%;
@@ -314,8 +314,6 @@ footer .contact li:hover,
   width: 100%;
   transform: translate(-50%, -50%);
 }
-
-
 .build-img .bg-img:hover{
   transform: scale(1.2);
 }
@@ -340,7 +338,6 @@ footer .contact li:hover,
 }
 .about .commontop h4{
   color: #333;
-  
 }
 .about .commontop p {
   margin: 0 0 24px;
@@ -586,7 +583,7 @@ padding: 10px 0;
 
 /* ------------------------modal-header------------------------- */
 .Mycart .btn-close, .modal-header .btn-close{
-  background-color: #f0c713;
+  background-color: var(--first-color);
 }
 /* my cart modal-dialog  */
 

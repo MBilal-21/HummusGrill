@@ -1,11 +1,104 @@
 /* 
-xxl ≥1400px 
-xl ≥1200px	
-lg ≥992px	
-md ≥768px	
-sm ≥576px	
 xs <576px 
+sm ≥576px	
+md ≥768px	
+lg ≥992px	
+xl ≥1200px	
+xxl ≥1400px 
 */
+@media screen and (width>=576px) {
+    /* ----------------newsletter----------------------- */
+
+    .newsletter .news-div-1,
+    .newsletter .news-div-2 form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 20px;
+    }
+
+    .newsletter .news-div-1,
+    .newsletter .news-div-2 form div {
+        flex-grow: 1;
+    }
+
+    .newsletter .news-div-2 .btn {
+        width: 100px !important;
+        height: 60px;
+        margin-top: 0px;
+    }
+
+    .newsletter .news-div-1 p {
+        border-left: 2px solid white;
+        padding: 10px;
+        margin: 0;
+    }
+
+    /* ----------------newsletter END----------------------- */
+
+    /* -------------------- checkOut --------------- */
+    .SummaryTable tbody tr {
+        font-size: 14px;
+    }
+
+    .SummaryTable tbody tr .name {
+        font-weight: 600;
+        padding: .5rem;
+    }
+    .cart-foot-btn{
+        flex-direction: row;
+      }
+
+}
+
+@media screen and (width>=768px) {
+    .btnHome {
+        font-size: 25px !important;
+    }
+
+
+    /*-------------------------- .createBag--------------------------- */
+    .createBag {
+        position: fixed;
+        max-width: 250px;
+        top: 240px;
+        right: 0%;
+        left: 100%;
+        margin-left: -250px;
+        padding: 10px;
+        height: 400px;
+
+    }
+
+    .createBag .stick {
+        position: sticky;
+        top: 0;
+        background: var(--body-color);
+    }
+
+    .selected-item-list {
+        min-height: 100px;
+        height: 200px;
+        overflow-y: auto;
+    }
+
+    /*--------------- dashboard ------------------*/
+    .userInfo {
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .userInfo .media {
+        text-align: start;
+    }
+
+
+}
+
 @media screen and (width>=992px) {
 
     /*------------------ header ----------------*/
@@ -76,97 +169,4 @@ xs <576px
     .display-1-6-col {
         display: none;
     }
-}
-
-@media screen and (width>=768px) {
-    .btnHome {
-        font-size: 25px !important;
-    }
-
-
-    /*-------------------------- .createBag--------------------------- */
-    .createBag {
-        position: fixed;
-        max-width: 250px;
-        top: 240px;
-        right: 0%;
-        left: 100%;
-        margin-left: -250px;
-        padding: 10px;
-        height: 400px;
-
-    }
-
-    .createBag .stick {
-        position: sticky;
-        top: 0;
-        background: var(--body-color);
-    }
-
-    .selected-item-list {
-        min-height: 100px;
-        height: 200px;
-        overflow-y: auto;
-    }
-
-    /*--------------- dashboard ------------------*/
-    .userInfo {
-        flex-direction: row;
-        justify-content: start;
-        align-items: center;
-        gap: 30px;
-    }
-
-    .userInfo .media {
-        text-align: start;
-    }
-
-
-}
-
-@media screen and (width>=576px) {
-    /* ----------------newsletter----------------------- */
-
-    .newsletter .news-div-1,
-    .newsletter .news-div-2 form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        gap: 20px;
-    }
-
-    .newsletter .news-div-1,
-    .newsletter .news-div-2 form div {
-        flex-grow: 1;
-    }
-
-    .newsletter .news-div-2 .btn {
-        width: 100px !important;
-        height: 60px;
-        margin-top: 0px;
-    }
-
-    .newsletter .news-div-1 p {
-        border-left: 2px solid white;
-        padding: 10px;
-        margin: 0;
-    }
-
-    /* ----------------newsletter END----------------------- */
-
-    /* -------------------- checkOut --------------- */
-    .SummaryTable tbody tr {
-        font-size: 14px;
-    }
-
-    .SummaryTable tbody tr .name {
-        font-weight: 600;
-        padding: .5rem;
-    }
-    .cart-foot-btn{
-        flex-direction: row;
-      }
-
 }

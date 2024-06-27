@@ -18,7 +18,7 @@ const Breadcrumbs = () => {
 // set breadcrumbs
     if (
       location.pathname === "/" ||
-      location.pathname === "/menu" ||
+      location.pathname.startsWith("/menu")||
       location.pathname === "/signature-wrap"
     )
       setShowBc(false);

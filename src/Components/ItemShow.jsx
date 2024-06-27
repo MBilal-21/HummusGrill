@@ -1,23 +1,27 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Col from "react-bootstrap/Col";
-import menu2 from "../Assets/Items/MenuItems/menuSide1.jpeg";
+// import menu2 from "../Assets/Items/MenuItems/menuSide1.jpeg";
 import { Appstate } from "../App";
 import AddIcon from "@mui/icons-material/Add";
 import ClearIcon from "@mui/icons-material/Clear";
 import Row from "react-bootstrap/esm/Row";
+import ImageWithLoader from "./ImageWithLoader";
 
-const ItemShow = ({ item }) => {
-  const useAppState = useContext(Appstate);
+const ItemShow = React.memo(({ item }) => {
+  useEffect(()=>{
+    console.log("reder itemsshow");
+  })
+  const {handleClose,setAddToCartItem} = useContext(Appstate);
   return (
     <Col md={6} sm={6} xs={12}>
       <div className="px-2">
         <Row className="menu-box">
           <Col className="image" xs={12} sm={12} lg={4}>
-            <img
-              src={menu2}
-              alt="Classic Hummus with pita bread"
-              className="img-fluid"
-            />
+            {/* <img
+              src={`${item.image}`}
+              alt={item.name}
+            /> */}
+             <ImageWithLoader src={`${item.image}`}  alt={item.name}/>
           </Col>
 
           <Col xs={12} sm={12} lg={8} className="caption">
@@ -34,8 +38,8 @@ const ItemShow = ({ item }) => {
               className="btn  dish-btn align-self-end"
               style={{ width: "minContent" }}
               onClick={() => {
-                useAppState.setShowAddToCart(true);
-                useAppState.setAddToCartItem(item);
+                handleClose();
+                setAddToCartItem(item);
               }}
             >
               Add To Cart
@@ -46,9 +50,10 @@ const ItemShow = ({ item }) => {
       {/* <!-- Box End --> */}
     </Col>
   );
-};
+});
+// -------------------------show items for create bag and create wrap------------------------------------------
 
-const CreateItems = () => {
+const CreateItems = ({item}) => {
   const [clickStyle, setClickStyle] = useState(false);
   const box = useRef();
   useEffect(() => {
@@ -60,23 +65,24 @@ const CreateItems = () => {
   return (
     <Col lg={6} sm={12} xs={12} onClick={() => setClickStyle(!clickStyle)}>
       {/* <!-- Box Start --> */}
-      <div className="menu-box d-flex" ref={box} style={{ cursor: "pointer" }}>
-        <div className="image" style={{ flex: "0 0 140px" }}>
-          <img
-            src={menu2}
-            alt="Classic Hummus with pita bread"
-            className="img-fluid"
-          />
-        </div>
-        <div className="caption">
-          <h4>Classic Hummus with pita bread</h4>
-          <span>
-            Hummus is a dip or spread made from cooked mashed chickpeas and
-            tahini. Our creamy hummus is made daily using fresh ingredients.
-            (vegan, vegetarian, gluten-Free).Pita bread is not gluten free
-          </span>
-          <div className="price">$6.99</div>
-        </div>
+      <div className="px-2">
+        <Row className="menu-box"  ref={box} style={{cursor:"pointer"}}>
+          <Col className="image" xs={12} sm={12} lg={4}>
+            {/* <img
+              src={`${item.image}`}
+              alt={item.name}
+            /> */}
+            <ImageWithLoader src={`${item.image}`}  alt={item.name}/>
+          </Col>
+          <Col xs={12} sm={12} lg={8} className="caption">
+            {/* item name */}
+            <h4>{item.name ? item.name : "No name available"}</h4>
+            {/* item about */}
+            <span>{item.about ? item.about : "No description available"}</span>
+            {/* item price */}
+            <div className="price">{item.price ? "+$" + item.price : ""}</div>
+          </Col>
+        </Row>
       </div>
       {/* <!-- Box End --> */}
     </Col>
@@ -86,7 +92,7 @@ const CreateItems = () => {
 // --------------------add extra and skip button at create bowl and wrap----------------------
 const AddSkipItems = () => {
   return (
-    <Col md={6} sm={6} xs={12}>
+    <Col md={6} sm={12} xs={12}>
       <div className="menu-box skipDiv">
         <div className="d-flex flex-wrap skipDiv-1">
           <div>

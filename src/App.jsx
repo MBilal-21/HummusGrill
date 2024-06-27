@@ -1,5 +1,11 @@
-import { createContext, useState } from "react";
-import { Route, Routes, Outlet, Link } from "react-router-dom";
+import React, {
+  createContext,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+} from "react";
+import { Route, Routes, Link, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Pages/Home";
@@ -13,48 +19,76 @@ import CreateBowl from "./Components/Pages/CreateBowl";
 import ContacUs from "./Components/Pages/ContacUs";
 import CheckOut from "./Components/Pages/CheckOut";
 import Dashboard from "./Components/Pages/Dashboard";
-import "./Assets/icofont/icofont.min.css"
-// import axios from 'axios';
+import "./Assets/icofont/icofont.min.css";
 
-const Layout = () => {
+export const Appstate = createContext();
+
+const Layout = ({ showAddToCart, showMycart, rm }) => {
+  useEffect(() => {
+    console.log("Layout render");
+  }, []);
+
   return (
     <div>
       <Navbar />
-      <AddToCart />
-      <Mycart />
+      <AddToCart sh={showAddToCart} />
+      <Mycart sh={showMycart} remove={rm} />
       <Outlet />
       <Footer />
     </div>
   );
 };
 
-const Appstate = createContext();
-
 function App() {
-  
   const [showMycart, setShowMycart] = useState(false);
   const [showAddToCart, setShowAddToCart] = useState(false);
   const [AddToCartItem, setAddToCartItem] = useState({});
-  let [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const removeitem = (index) => {
+    const updatedItems = [...cartItems];
+    updatedItems.splice(index, 1);
+    setCartItems(updatedItems);
+  };
+
+ 
+  
+
+  const handleClose = useCallback((c) => {
+    if (c === "cart") 
+      setShowMycart((prev) => !prev);
+    
+    else
+    setShowAddToCart((prev) => !prev);
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      handleClose,
+      AddToCartItem,
+      setAddToCartItem,
+      cartItems,
+      setCartItems
+    }),
+    [handleClose, AddToCartItem, cartItems]
+  );
+
 
   return (
-    <Appstate.Provider
-      value={{
-        setShowMycart,
-        showMycart,
-        showAddToCart,
-        setShowAddToCart,
-        AddToCartItem,
-        setAddToCartItem,
-        cartItems,
-        setCartItems,
-      }}
-    >
+    <Appstate.Provider value={contextValue}>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route
+          path="/"
+          element={
+            <Layout
+              showAddToCart={showAddToCart}
+              showMycart={showMycart}
+              rm={removeitem}
+            />
+          }
+        >
           <Route index element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />}/>
-          <Route path="/menu" element={<Home />}/>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/menu" element={<Home />} />
           <Route path="/signature-wrap" element={<Home />} />
           <Route path="/create-bowl" element={<CreateBowl />} />
           <Route path="/about" element={<AboutUs />} />
@@ -78,4 +112,3 @@ function App() {
 }
 
 export default App;
-export { Appstate };
