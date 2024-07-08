@@ -343,10 +343,11 @@ footer .contact li:hover,
   margin: 0 0 24px;
 }
 .about .homeImageSlides{
-  max-width: 500px !important;
-  height: 450px !important;
+  filter: brightness(1);
+  max-width: 500px ;
+  height: 450px ;
 }
-/* Contact-us */
+/*------------------------------------- Contact-us ---------------------*/
 .Contact-us form{
   height: 500px;
   display: flex;
@@ -407,6 +408,12 @@ footer .contact li:hover,
   text-align: justify;
   font-weight: 600;
 }
+/* -----------------add Extra model start------------------------------ */
+.extraModelbody{
+  max-height: 400px;
+  overflow-y: auto;
+}
+/* -----------------add Extra model end------------------------------ */
 /*-------------------------  Menu items end ----------------------------*/
 /*additional create bowl and create wrap  */
 
@@ -585,7 +592,7 @@ padding: 10px 0;
 .Mycart .btn-close, .modal-header .btn-close{
   background-color: var(--first-color);
 }
-/* my cart modal-dialog  */
+/* my cart modal-dialog  start */
 
 .Mycart .modal-dialog .modal-content{
   height: 100%;
@@ -631,6 +638,34 @@ padding: 10px 0;
   background: var(--first-color) !important;
   color: var(--text-color) !important;
 }
+/* ---------------my cart modal-dialog  end----------------- */
+/* -------------------add to cart modal-dialog  start----------------- */
+.add-signature{
+  padding:10px 30px;
+}
+.add-signature .row{
+  text-align: start;
+  
+}
+.add-signature .input-field, .add-signature label{
+  cursor: pointer;
+}
+.add-signature .input-field[type='text']{
+  width: 100%;
+  border: 5px solid var(--first-color);
+  line-height: 30px;
+  padding: 0 10px;
+}
+.add-signature .input-feild:focus-visible{
+  outline: none;
+}
+.add-signature .input-field[type='checkbox']{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  accent-color: var(--first-color);
+}
+/* -------------------add to cart modal-dialog  end----------------- */
 /* -------------------- checkOut --------------- */
 .checkOutRows{
   padding: 20px;
@@ -717,6 +752,8 @@ padding: 10px 0;
   padding: 10px;
   border-radius: 5px;
 }
+
+ 
 /* loyality program page
 online payement 
 payement at store */

@@ -20,7 +20,7 @@ const increDecrement = (number, setNumber, operator) => {
 };
 
 // My Cart component
-const Mycart = ({ sh, remove, inc, dec, clear }) => {
+const Mycart = ({ sh, remove }) => {
   const { setCartItems, cartItems, handleClose } = useContext(Appstate);
   const increment = (i) => {
     const updatedItems = [...cartItems];
@@ -142,7 +142,6 @@ const AddToCart = ({ sh }) => {
 
   useEffect(() => {
     setItem(AddToCartItem);
-    
   }, [AddToCartItem]);
 
   const funcToAddInCart = () => {
@@ -186,20 +185,23 @@ const AddToCart = ({ sh }) => {
         {/* signature wrap ingrediants start */}
         <div>
         {item.category === "signature" && (
-          <div>
-            <input type="text" name="mealFor" className="input-feild" />
+          <div className="add-signature">
+            <input type="text" name="mealFor" className="input-field" placeholder="This Meal is For?"/>
             <p>
               *Ingredients can be unchecked if you don't want them in your wrap
               and you can also add special instructions.
             </p>
             {/* check ingrediant inputs */}
+            <div className="row">
+
             {item.ingrediants.map((e, i) => (
-              <div key={i}>
-                <input type="checkbox"  id={e.name} defaultChecked={e.selected} onChange={(event)=>{handleIngrediant(i,event.currentTarget.checked)}}/>
+              <div key={i} className="col-6">
+                <input type="checkbox" className="input-field" id={e.name} defaultChecked={e.selected} onChange={(event)=>{handleIngrediant(i,event.currentTarget.checked)}}/>
                 <label htmlFor={e.name}>{e.name}</label>
               </div>
             ))}
-            <input type="text" name="specialInstruct" className="input-feild" />
+            </div>
+            <input type="text" name="specialInstruct" className="input-field" placeholder="Special Instructions"/>
           </div>
         )}
         </div>
