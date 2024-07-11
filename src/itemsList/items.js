@@ -302,6 +302,7 @@ export const ItemList = [
         id: "",
         name: "Create Bowl",
         quantity: 1,
+        basePrice:12.11,
         price: 12.11,
         specialInstruct: "",
         ingrediants: [

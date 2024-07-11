@@ -6,9 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Row from "react-bootstrap/esm/Row";
 import ImageWithLoader from "./ImageWithLoader";
 import AddExtraModel from "./AddExtraModel";
-import { Link, useNavigate } from "react-router-dom";
 
-// React.memo remove from here cut it comment
 const ItemShow = ({ item }) => {
   useEffect(()=>{
     console.log("reder items show for menu and signature");
