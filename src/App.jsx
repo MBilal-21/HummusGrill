@@ -23,7 +23,16 @@ import "./Assets/icofont/icofont.min.css";
 
 export const Appstate = createContext();
 
-const Layout = ({ showAddToCart, showMycart, rm }) => {
+const Layout = ({
+  showAddToCart,
+  showMycart,
+  rm,
+  increment,
+  decrement,
+  clearBag,
+  subTotal,
+  setSubTotal
+}) => {
   useEffect(() => {
     console.log("Layout render");
   }, []);
@@ -31,8 +40,16 @@ const Layout = ({ showAddToCart, showMycart, rm }) => {
   return (
     <div>
       <Navbar />
-      <AddToCart sh={showAddToCart} />
-      <Mycart sh={showMycart} remove={rm} />
+      <AddToCart sh={showAddToCart} increment={increment}
+        decrement={decrement} subTotal={subTotal} setSubTotal={setSubTotal}/>
+      <Mycart
+        sh={showMycart}
+        remove={rm}
+        increment={increment}
+        decrement={decrement}
+        clearBag={clearBag}
+        subTotal={subTotal}
+      />
       <Outlet />
       <Footer />
     </div>
@@ -44,21 +61,52 @@ function App() {
   const [showAddToCart, setShowAddToCart] = useState(false);
   const [AddToCartItem, setAddToCartItem] = useState({});
   const [cartItems, setCartItems] = useState([]);
+  const [subTotal, setSubTotal] = useState(0.00);
+  const setFormattedSubTotal = (value) => {
+    setSubTotal(parseFloat(value).toFixed(2));
+  };
   const removeitem = (index) => {
     const updatedItems = [...cartItems];
+    let totalprice = subTotal;
+    const itemToRemove = updatedItems[index];
+    totalprice -= itemToRemove.price;
     updatedItems.splice(index, 1);
+    setFormattedSubTotal(totalprice);
     setCartItems(updatedItems);
   };
-
  
+  const increment = (i) => {
+
+      let totalprice = parseFloat(subTotal);  
+      const updatedItems = [...cartItems];
+      updatedItems[i].quantity = updatedItems[i].quantity + 1;
+      totalprice += updatedItems[i].price;
+      console.log("+", totalprice);
+      console.log("pp", totalprice + updatedItems[i].price);
+      setFormattedSubTotal(totalprice);
+      setCartItems(updatedItems);
+  };
+  
+  const decrement = (i) => {
+    if (cartItems[i].quantity > 1) {
+      let totalprice = parseFloat(subTotal); 
+      const updatedItems = [...cartItems];
+      updatedItems[i].quantity = updatedItems[i].quantity - 1;
+      totalprice -= updatedItems[i].price;
+      setFormattedSubTotal(totalprice);
+      setCartItems(updatedItems);
+    }
+  };
+  
+  const clearBag = () => {
+    setCartItems([]);
+    setFormattedSubTotal(0.00);
+  };
   
 
   const handleClose = useCallback((c) => {
-    if (c === "cart") 
-      setShowMycart((prev) => !prev);
-    
-    else
-    setShowAddToCart((prev) => !prev);
+    if (c === "cart") setShowMycart((prev) => !prev);
+    else setShowAddToCart((prev) => !prev);
   }, []);
 
   const contextValue = useMemo(
@@ -67,11 +115,10 @@ function App() {
       AddToCartItem,
       setAddToCartItem,
       cartItems,
-      setCartItems
+      setCartItems,
     }),
     [handleClose, AddToCartItem, cartItems]
   );
-
 
   return (
     <Appstate.Provider value={contextValue}>
@@ -83,6 +130,11 @@ function App() {
               showAddToCart={showAddToCart}
               showMycart={showMycart}
               rm={removeitem}
+              increment={increment}
+              decrement={decrement}
+              clearBag={clearBag}
+              subTotal={subTotal}
+              setSubTotal={setFormattedSubTotal}
             />
           }
         >
@@ -96,7 +148,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/passwordreset" element={<ResetPassword />} />
-          <Route path="/cart" element={<CheckOut />} />
+          <Route
+            path="/cart"
+            element={<CheckOut rm={removeitem} subTotal={subTotal} setSubTotal={setFormattedSubTotal}/>}
+          />
           <Route
             path="*"
             element={

@@ -7,7 +7,11 @@ import { ItemList } from "../../itemsList/items";
 
 const CreateBowl = () => {
   const items = ItemList[0].createMeal[0];
-  const [countItems, setCountItems] = useState(0);
+  const [countItems, setCountItems] = useState(()=>{
+    const savedCount = localStorage.getItem("savedCount");
+    return savedCount ? JSON.parse(savedCount) : 0;
+
+  });
   const [meal, setMeal] = useState(() => {
     const savedMeal = localStorage.getItem("meal");
     return savedMeal ? JSON.parse(savedMeal) : { ...items };
@@ -15,6 +19,7 @@ const CreateBowl = () => {
 
   useEffect(() => {
     localStorage.setItem("meal", JSON.stringify(meal));
+    localStorage.setItem("savedCount", JSON.stringify(countItems));
     console.log(meal);
     console.log(countItems);
     console.log("ItemList[0].createMeal[0]",ItemList[0].createMeal[0]);
@@ -30,16 +35,15 @@ const CreateBowl = () => {
         ingredient.extraCount = 0;
         ingredient.skipAll = false;
         ingredient.items.forEach((item) => {
-            item.addExtra = false;
-            item.selected = false;
+        item.addExtra = false;
+        item.selected = false;
         });
     });
 
     setMeal(newMeal);
-
-
     setCountItems(0);
-    localStorage.removeItem("meal");
+
+
   }
 
   const selectFunction = (parent, child, addExtra) => {

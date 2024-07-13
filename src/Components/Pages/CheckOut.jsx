@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,6 +7,7 @@ import SectionHeader from "../SectionHeader";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
+import { Appstate } from "../../App";
 
 const NoCheckOut = () => {
   return (
@@ -22,18 +23,25 @@ const NoCheckOut = () => {
           Please add some items to proceed.
         </h2>
         <Link to={"/"}>
-          <button className="btn dish-btn btn-wide ">
-             Go to Home 
-          </button>
+          <button className="btn dish-btn btn-wide ">Go to Home</button>
         </Link>
       </div>
     </div>
   );
 };
 
-const CheckOut = () => {
+const CheckOut = ({ rm, subTotal, setSubTotal}) => {
+  const { cartItems } = useContext(Appstate);
+  const [total, setTotal] = useState(0.00);
+  const [taxes, setTaxes] = useState(0.00);
   const navigate = useNavigate();
   const [isEmpty, setIsEmpty] = useState(false);
+  useEffect(() => {
+    cartItems.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
+    let p = taxes + subTotal;
+    setTotal(parseFloat(p).toFixed(2));
+  }, [cartItems]);
+
   return (
     <div className="about">
       <Container>
@@ -49,7 +57,7 @@ const CheckOut = () => {
                     navigate(-1);
                   }}
                 >
-                  <ArrowBackIcon/>
+                  <ArrowBackIcon />
                   GO TO BACK
                 </button>
               </Col>
@@ -71,7 +79,7 @@ const CheckOut = () => {
                         name="method"
                         id="method"
                         value={"Pickup"}
-                        checked
+                        defaultChecked
                         readOnly
                       />
                       <label htmlFor="method">Pick up</label>
@@ -89,7 +97,7 @@ const CheckOut = () => {
                             name="pickup"
                             id="pickup1"
                             value={"15to30min"}
-                           defaultChecked
+                            defaultChecked
                           />
                           <label htmlFor="pickup1">15 to 30 minutes</label>
                         </Col>
@@ -200,7 +208,7 @@ const CheckOut = () => {
                         name="payment"
                         id="payment"
                         value={"payment"}
-                        Checked
+                        defaultChecked
                         readOnly
                       />
                       <label htmlFor="payment">Payment at Resturent</label>
@@ -223,12 +231,34 @@ const CheckOut = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr className="checkOutRows">
+                        {cartItems.map((e, i) => {
+                          let p = e.price * e.quantity;
+                          return (
+                            <tr className="checkOutRows" key={i}>
+                              <td className="name">{e.name}</td>
+                              <td>
+                                ${e.price+" "}x{" "+e.quantity}
+                              </td>
+                              <td>${p.toFixed(2)}</td>
+                              <td className="remove">
+                                <div
+                                  className="btn-close"
+                                  aria-label="remove"
+                                  onClick={() => rm(i)}
+                                ></div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                        {/* <tr className="checkOutRows">
                           <td className="name">HummusHummusHummus Grill</td>
                           <td>$85 x 4</td>
                           <td>$340</td>
                           <td className="remove">
-                            <div className="btn-close" aria-label="remove"></div>
+                            <div
+                              className="btn-close"
+                              aria-label="remove"
+                            ></div>
                           </td>
                         </tr>
                         <tr className="checkOutRows">
@@ -236,17 +266,12 @@ const CheckOut = () => {
                           <td>$85 x 4</td>
                           <td>$340</td>
                           <td className="remove">
-                            <div className="btn-close" aria-label="remove"></div>
+                            <div
+                              className="btn-close"
+                              aria-label="remove"
+                            ></div>
                           </td>
-                        </tr>
-                        <tr className="checkOutRows">
-                          <td className="name">HummusHummusHummus Grill</td>
-                          <td>$85 x 4</td>
-                          <td>$340</td>
-                          <td className="remove">
-                            <div className="btn-close" aria-label="remove"></div>
-                          </td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </table>
                   </Col>
@@ -259,15 +284,15 @@ const CheckOut = () => {
                       <tbody>
                         <tr style={{ fontWeight: "bold" }}>
                           <td>Subtotal</td>
-                          <td>$41.94</td>
+                          <td>${subTotal}</td>
                         </tr>
                         <tr className="display-1-6-col">
                           <td>Taxes</td>
-                          <td>$2.52</td>
+                          <td>${taxes}</td>
                         </tr>
                         <tr className="display-1-6-col">
                           <td>Total</td>
-                          <td>$44.46</td>
+                          <td>${total}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -300,15 +325,15 @@ const CheckOut = () => {
                   <tbody>
                     <tr>
                       <td>Subtotal</td>
-                      <td>$41.94</td>
+                      <td>${subTotal}</td>
                     </tr>
                     <tr>
                       <td>Taxes</td>
-                      <td>$2.52</td>
+                      <td>${taxes}</td>
                     </tr>
                     <tr>
                       <td>Total</td>
-                      <td>$44.46</td>
+                      <td>${total}</td>
                     </tr>
                   </tbody>
                 </table>

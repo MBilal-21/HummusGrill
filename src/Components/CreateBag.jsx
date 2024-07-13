@@ -1,8 +1,19 @@
-import React, { memo } from "react";
+import React, { useEffect } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-
+import { useContext } from "react";
+import { Appstate } from "../App";
 const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
+  const {handleClose,setAddToCartItem} = useContext(Appstate);
+  useEffect(()=>{
+    console.log("create bag--",handleClose);
+    
+  },[])
+  const openAddCart = () =>{
+    setAddToCartItem(meal);
+    handleClose();
+  }
+ 
   return (
     <div className="createBag col-12">
       <div className="stick">
@@ -21,7 +32,7 @@ const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
         </ul>
         <div className="d-flex gap-2">
           {" "}
-          <button type="button" className="btn  dish-btn">
+        <button type="button" className="btn  dish-btn" onClick={openAddCart}>
             Add To Cart
           </button>
           <button type="button" className="btn  dish-btn" onClick={resetMeal}>
@@ -90,4 +101,4 @@ const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
   );
 };
 
-export default memo(CreateBag);
+export default CreateBag;

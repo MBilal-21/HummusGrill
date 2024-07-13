@@ -8,33 +8,9 @@ import { Appstate } from "../App";
 import { Link } from "react-router-dom";
 import ImageWithLoader from "./ImageWithLoader";
 
-const increDecrement = (number, setNumber, operator) => {
-  let q;
-  if (operator === "-") {
-    q = number.quantity - 1;
-    if (number.quantity > 1) setNumber({ ...number, quantity: q });
-  } else if (operator === "+") {
-    q = number.quantity + 1;
-    setNumber({ ...number, quantity: q });
-  }
-};
-
 // My Cart component
-const Mycart = ({ sh, remove }) => {
-  const { setCartItems, cartItems, handleClose } = useContext(Appstate);
-  const increment = (i) => {
-    const updatedItems = [...cartItems];
-    updatedItems[i].quantity = updatedItems[i].quantity + 1;
-    setCartItems(updatedItems);
-  };
-  const decrement = (i) => {
-    const updatedItems = [...cartItems];
-    updatedItems[i].quantity = updatedItems[i].quantity + 1;
-    setCartItems(updatedItems);
-  };
-  const clearBag = () => {
-    setCartItems([]);
-  };
+const Mycart = ({ sh, remove, increment, decrement, clearBag, subTotal }) => {
+  const { cartItems, handleClose } = useContext(Appstate);
 
   return (
     <Offcanvas
@@ -56,7 +32,7 @@ const Mycart = ({ sh, remove }) => {
                 <h2>
                   {item.name}
                   <span>
-                    <small>{"(span text)"}</small>
+                    <small>{item.mealFor && "(" + item.mealFor + ")"}</small>
                   </span>
                 </h2>
                 <div className="price">
@@ -65,14 +41,29 @@ const Mycart = ({ sh, remove }) => {
                 </div>
                 <ul className="itemsList p-0 mt-2">
                   <li>
-                  {item.category === "signature" && item.ingrediants.map((e,i)=>
-                  <span key={i}>{e.selected && e.name}</span>
+                    {item.category === "signature" &&
+                      item.ingrediants.map((ingrediant, i) => (
+                        <span key={i}>
+                          {ingrediant.selected && ingrediant.name}
+                        </span>
+                      ))}
+                    {item.category === "createMeal" &&
+                      item.ingrediants.map((ingrediant, i) => {
+                        // console.log(ingrediant);
+                        return ingrediant.items.map((e, index) => (
+                          <span key={e.id + index}>
+                            {e.selected && e.name}{" "}
+                            <span>{e.addExtra && "Extra" + e.name}</span>{" "}
+                          </span>
+                        ));
+                      })}
+                  </li>
+                  {item.specialInstruct && (
+                    <li>
+                      <strong>Special instructions: </strong>
+                      <span>{item.specialInstruct}</span>
+                    </li>
                   )}
-                </li>
-               {item.specialInstruct && <li>
-                  <strong>Special instructions: </strong>
-                  <span>{item.specialInstruct}</span>
-                </li>}
                 </ul>
                 <hr className="my-2" />
                 {/* increament and decreament buttons */}
@@ -117,8 +108,10 @@ const Mycart = ({ sh, remove }) => {
             ))}
 
             <div className="cart-foot-btn">
-              <Link to={"/cart"}>
-                <button className="btn cartbtn">Go To Checkout {"$375"}</button>
+              <Link to={"/cart"} onClick={()=>handleClose("cart")}>
+                <button className="btn cartbtn">
+                  Go To Checkout {"$ " + subTotal}
+                </button>
               </Link>
               <Link to={"/"}>
                 <button className="btn cartbtn">Add More items</button>
@@ -135,31 +128,48 @@ const Mycart = ({ sh, remove }) => {
 };
 
 // Add to cart button component
-const AddToCart = ({ sh }) => {
+const AddToCart = ({ sh, subTotal, setSubTotal }) => {
   const { setCartItems, cartItems, AddToCartItem, handleClose } =
     useContext(Appstate);
   const [item, setItem] = useState(AddToCartItem);
 
   useEffect(() => {
+    // console.log(item);
     setItem(AddToCartItem);
   }, [AddToCartItem]);
+  const incre = () =>{
+    setItem({...item, quantity: item.quantity + 1})
+  }
+  const decre = () =>{
+    setItem({...item, quantity: item.quantity - 1})
+  }
 
   const funcToAddInCart = () => {
     const it = { ...item };
-    const date = new Date().getDate();
+    let p = parseFloat(subTotal);
+    const date = new Date().getTime();
     it.id = date;
-    console.log(item);
     const updatedCartItems = [...cartItems, it];
+    p = it.price*it.quantity;
+    setSubTotal(p);
     setCartItems(updatedCartItems);
     handleClose("cart");
     handleClose();
   };
   const handleIngrediant = (i, value) => {
-    const it = {...item};
+    const it = { ...item };
     it.ingrediants[i].selected = value;
     setItem(it);
-    console.log(item);
-  }
+    // console.log(item);
+  };
+  const handleInstruct = (e) => {
+    // console.log(item);
+    let nam = e.target.name;
+    let value = e.target.value;
+    setItem((prev) => {
+      return { ...prev, [nam]: value };
+    });
+  };
 
   return (
     <Modal
@@ -184,44 +194,55 @@ const AddToCart = ({ sh }) => {
         </div>
         {/* signature wrap ingrediants start */}
         <div>
-        {item.category === "signature" && (
-          <div className="add-signature">
-            <input type="text" name="mealFor" className="input-field" placeholder="This Meal is For?"/>
-            <p>
-              *Ingredients can be unchecked if you don't want them in your wrap
-              and you can also add special instructions.
-            </p>
-            {/* check ingrediant inputs */}
-            <div className="row">
-
-            {item.ingrediants.map((e, i) => (
-              <div key={i} className="col-6">
-                <input type="checkbox" className="input-field" id={e.name} defaultChecked={e.selected} onChange={(event)=>{handleIngrediant(i,event.currentTarget.checked)}}/>
-                <label htmlFor={e.name}>{e.name}</label>
+          {item.category === "signature" && (
+            <div className="add-signature">
+              <input
+                type="text"
+                name="mealFor"
+                className="input-field"
+                placeholder="This Meal is For?"
+                onChange={handleInstruct}
+              />
+              <p>
+                *Ingredients can be unchecked if you don't want them in your
+                wrap and you can also add special instructions.
+              </p>
+              {/* check ingrediant inputs */}
+              <div className="row">
+                {item.ingrediants.map((e, i) => (
+                  <div key={i} className="col-6">
+                    <input
+                      type="checkbox"
+                      className="input-field"
+                      id={e.name}
+                      defaultChecked
+                      onChange={(event) => {
+                        handleIngrediant(i, event.currentTarget.checked);
+                      }}
+                    />
+                    <label htmlFor={e.name}>{e.name}</label>
+                  </div>
+                ))}
               </div>
-            ))}
+              <input
+                type="text"
+                name="specialInstruct"
+                className="input-field"
+                placeholder="Special Instructions"
+                onChange={handleInstruct}
+              />
             </div>
-            <input type="text" name="specialInstruct" className="input-field" placeholder="Special Instructions"/>
-          </div>
-        )}
+          )}
         </div>
         {/* signature wrap ingrediants end */}
 
         <hr />
         <div className="d-flex justify-content-between align-items-center px-3">
-          <button
-            className="btn-circle"
-            onClick={() => {
-              increDecrement(item, setItem, "-");
-            }}
-          >
+          <button className="btn-circle" onClick={decre}>
             <RemoveIcon />
           </button>
           <span>{item.quantity}</span>
-          <button
-            className="btn-circle"
-            onClick={() => increDecrement(item, setItem, "+")}
-          >
+          <button className="btn-circle" onClick={incre}>
             <AddIcon />
           </button>
         </div>

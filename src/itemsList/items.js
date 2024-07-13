@@ -212,15 +212,15 @@ export const ItemList = [
           "Shawarma is a dish in Middle Eastern cuisine consisting of meat cut into thin slices, stacked in a cone-like shape, and roasted on a slowly-turning vertical rotisserie. The combination of middle eastern spices gives the chicken shawarma a distinctive warming spice flavor that’s quite unique.",
         price: 11.99,
         ingrediants: [
-          { name: "Tabbouleh", slected: true },
-          { name: "Garlic Sauce", slected: true },
-          { name: "Classic Hummus", slected: true },
-          { name: "Tomatoes", slected: true },
-          { name: "Cucumbers", slected: true },
-          { name: "Pickled Red Cabbage", slected: true },
-          { name: "Ezme", slected: true },
-          { name: "Harrisa Sauce", slected: true },
-          { name: "Shug Sauce", slected: true },
+          { name: "Tabbouleh", selected: true },
+          { name: "Garlic Sauce", selected: true },
+          { name: "Classic Hummus", selected: true },
+          { name: "Tomatoes", selected: true },
+          { name: "Cucumbers", selected: true },
+          { name: "Pickled Red Cabbage", selected: true },
+          { name: "Ezme", selected: true },
+          { name: "Harrisa Sauce", selected: true },
+          { name: "Shug Sauce", selected: true },
         ],
         category: "signature",
         mealFor: "",
@@ -299,12 +299,13 @@ export const ItemList = [
     // start of create bowl
     createMeal: [
       {
-        id: "",
+        id: 0,
         name: "Create Bowl",
         quantity: 1,
-        basePrice:12.11,
+        basePrice: 12.11,
         price: 12.11,
         specialInstruct: "",
+        category: "createMeal",
         ingrediants: [
           {
             id: "b1",
