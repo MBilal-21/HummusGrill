@@ -1,24 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import ClearIcon from "@mui/icons-material/Clear";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { useContext } from "react";
 import { Appstate } from "../App";
-const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
-  const {handleClose,setAddToCartItem} = useContext(Appstate);
-  useEffect(()=>{
-    console.log("create bag--",handleClose);
-    
-  },[])
+import ToastMeal from "./ToastinMeal";
+const CreateBag = ({meal, selectFunction,   resetMeal, countItems,editmealId,editIndex }) => {
+  const[err, setErr] = useState(true);
+  const {handleClose,setAddToCartItem, cartItems, setCartItems, subTotal,setFormattedSubTotal} = useContext(Appstate);
+ 
   const openAddCart = () =>{
-    setAddToCartItem(meal);
-    handleClose();
+    for (let i = 0; i < meal.ingrediants.length; i++) {
+      const e = meal.ingrediants[i];
+      if (e.count === 0 && e.skipAll===false) {
+        
+        setErr(true);
+        setTimeout(()=>{setErr(false)},5000);
+        return;
+      }
+      // setErr(false);
+    }
+  if (editmealId && cartItems.length) {
+    let p = Number(subTotal);
+    const editCartMeal = [...cartItems];
+    p -= Number(editCartMeal[editIndex].price)* Number(editCartMeal[editIndex].quantity);
+    p += Number(meal.price)* Number(meal.quantity);
+    setFormattedSubTotal(p);
+    editCartMeal[editIndex] = JSON.parse(JSON.stringify(meal));
+    setCartItems(editCartMeal)
+    handleClose("cart");
+    return;
   }
+    const c = JSON.parse(JSON.stringify(meal));
+      setAddToCartItem(c);
+      handleClose("");
+    
+  }
+
  
   return (
+    <>
+    <ToastMeal message={"Please select the mendatory meal or skip it"} showA={err} setShowA={setErr}/>
     <div className="createBag col-12">
       <div className="stick">
         <h4>
-          Create A Bowl <span>{"(Sr 2)"}</span>
+          {meal.name} 
+          {/* <span>{"(Sr 2)"}</span> */}
         </h4>
         <ul>
           <li className="createBag-li">
@@ -27,7 +53,7 @@ const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
           </li>
           <li className="createBag-li">
             <span>Total Price</span>
-            <span>({meal.price && "$ " + meal.price})</span>
+            <span>({meal.price && "$ " + parseFloat(meal.price).toFixed(2)})</span>
           </li>
         </ul>
         <div className="d-flex gap-2">
@@ -44,6 +70,33 @@ const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
       <div className="selected-item-list">
         <ul className="my-3">
           {meal.ingrediants.map((e, parent) => {
+            if (e.skipAll) {
+              return <React.Fragment key={e.id}>
+                 <li className="my-1 w-100">
+                    <div className="d-flex">
+                      <img
+                        src={e.image}
+                        alt=""
+                        width={80}
+                        height={80}
+                        style={{ objectFit: "fill",background:"yellow" }}
+                      />
+                      <div className="ms-2">
+                        <div>{`Skipped  ${e.name}`}</div>
+                        {/* <div>{item.price && "$ " + item.price}</div> */}
+                      </div>
+                    </div>
+
+                    {/* <div
+                      className="remove-item-icon"
+                      onClick={() => selectFunction(parent, child, 0)}
+                    >
+                      <ClearIcon />{" "}
+                    </div> */}
+                  </li>
+              </React.Fragment>
+            }
+
             return e.items.map((item, child) => (
               <React.Fragment key={child}>
                 {item.selected && (
@@ -98,6 +151,7 @@ const CreateBag = ({meal, selectFunction,   resetMeal, countItems }) => {
         </ul>
       </div>
     </div>
+    </>
   );
 };
 

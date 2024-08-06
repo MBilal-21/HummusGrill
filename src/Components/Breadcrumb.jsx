@@ -9,16 +9,19 @@ const Breadcrumbs = () => {
   const [showBc, setShowBc] = useState(true);
   const [showCurrentH, setShowCurrentH] = useState("");
   useEffect(() => {
-	// set heading
-    if ((pathnames[pathnames.length - 1] === "about"))
-      setShowCurrentH("about us");
-    else if ((pathnames[pathnames.length - 1] === "contact"))
-      setShowCurrentH("contact us");
+    // set heading
+   
+    if (location.pathname.startsWith("/create-meal"))
+      setShowCurrentH("Create Meal");
+    if (location.pathname.startsWith("/view-ordered-history"))
+      setShowCurrentH("view ordered history");
+    else if (location.pathname.startsWith("/checkout"))
+      setShowCurrentH("Thankyou");
     else setShowCurrentH(pathnames[pathnames.length - 1]);
-// set breadcrumbs
+    // set breadcrumbs
     if (
       location.pathname === "/" ||
-      location.pathname.startsWith("/menu")||
+      location.pathname.startsWith("/menu") ||
       location.pathname === "/signature-wrap"
     )
       setShowBc(false);
@@ -41,9 +44,12 @@ const Breadcrumbs = () => {
             return isLast ? (
               <span key={breadcrumbPath}> / {name}</span>
             ) : (
-              <span key={breadcrumbPath} className="breadlink">
+              <span key={breadcrumbPath}>
                 {" "}
-                / <Link to={breadcrumbPath}>{name}</Link>
+                /{" "}
+                <Link to={breadcrumbPath} className="breadlink">
+                  {name}
+                </Link>
               </span>
             );
           })}

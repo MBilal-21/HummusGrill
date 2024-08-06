@@ -21,7 +21,6 @@ const OurMenu = () => {
   };
   const menuSearch = useLocation().search;
   useEffect(() => {
-    console.log("our menu");
     const ms = menuSearch.split("=")[1];
     m1.current.classList.add("c-w_Bg-Y");
     m2.current.classList.add("c-w_Bg-Y");

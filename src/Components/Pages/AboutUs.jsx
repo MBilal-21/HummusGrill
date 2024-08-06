@@ -16,15 +16,15 @@ const AboutUs = () => {
             <h4>about our restaurant food &amp; drinkes</h4>
             <Divider/>
 
-            <p className="des">
+            <p className="des text-justify">
               Hummus Mediterranean Grill has been serving the Hagerstown
               community with the best Chicken/Lamb Shawarma's, Wraps and
               Desserts. At Hummus Grill, every dish is created using only the
               freshest and the finest ingredients. All of our Shawarma's and
               Wraps are topped with only the freshest toppings.
             </p>
-            <p>
-              Call Us Today!
+            <p  className="text-justify">
+             <em> Call Us Today!</em>
               <br />
               Find out why our customers rave about us. We have been a part of
               the Hagerstown community since 2018. We use only the best
@@ -32,7 +32,7 @@ const AboutUs = () => {
             </p>
           </div>
           {/* <!-- Title Content End --> */}
-          <div className="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+          <div className="col-sm-12 col-md-12 col-lg-6 col-xs-12 d-flex justify-content-center align-items-center">
             <Carousel data-bs-theme="dark" controls={false} indicators={false}>
               <Carousel.Item>
                 <img

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -30,17 +30,62 @@ const NoCheckOut = () => {
   );
 };
 
-const CheckOut = ({ rm, subTotal, setSubTotal}) => {
-  const { cartItems } = useContext(Appstate);
-  const [total, setTotal] = useState(0.00);
-  const [taxes, setTaxes] = useState(0.00);
+const CheckOut = ({ rm}) => {
+  const { cartItems,subTotal,setCartItems } = useContext(Appstate);
+  const [total, setTotal] = useState(0.0);
+  const [taxes, setTaxes] = useState(0.0);
   const navigate = useNavigate();
   const [isEmpty, setIsEmpty] = useState(false);
+  const [requi, setRequi] = useState(false);
+  const schedule = useRef();
+  const [inputData, setInputData] = useState({
+    method:"pickup",
+    pickupTime:"15 to 30 min",
+    pickupDate:"",
+    orderUpdatemsg:true,
+    phoneNumber:"",
+    specialInstructions:"",
+    paymentMethod:"payment at resturent",
+  })
   useEffect(() => {
     cartItems.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
-    let p = taxes + subTotal;
+    setTaxes(1.6);
+    let p = Number(taxes) + Number(subTotal);
     setTotal(parseFloat(p).toFixed(2));
   }, [cartItems]);
+
+ 
+  const placeOrder = (e) => {
+    e.preventDefault();
+    let localOrders = localStorage.getItem("Orders");
+    let parsedOrders = localOrders ? JSON.parse(localOrders) : [];
+    let t = new Date();
+    let newoder = {
+       orderId: t.getDate() + t.getTime() ,
+       orderItems: JSON.parse(JSON.stringify(cartItems)),
+       placeData: {...inputData},
+       taxes:taxes,
+       subTotal: subTotal,
+       total: total,
+       orderDate: t.toDateString(),
+       orderStatus: "pending"
+      };
+    parsedOrders.push(newoder);
+    // Store the updated orders array back to localStorage
+    localStorage.setItem("Orders", JSON.stringify(parsedOrders));
+    // Clear the cart items (assuming setCartItems is a function that updates the state)
+    setCartItems([]);
+    // Navigate to the checkout page
+    navigate(`/checkout/${newoder.orderId}`);
+  };
+
+  const handleChange = (e) =>{
+    const { name, value,type, checked } = e.target;
+    // const newValue = type === "radio" ? checked : value; 
+    setRequi(schedule.current.checked) 
+    setInputData((prevData) => ({ ...prevData, [name]: value }));
+
+  }
 
   return (
     <div className="about">
@@ -61,6 +106,8 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                   GO TO BACK
                 </button>
               </Col>
+              <form onSubmit={placeOrder} >
+                <Row>
               <Col
                 xs={12}
                 md={12}
@@ -68,7 +115,6 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                 // className="text-center"
                 style={{ border: "1px  solid gray" }}
               >
-                <form>
                   <Row className="checkOutRows">
                     <Col md={3}>
                       <span>Method</span>
@@ -79,6 +125,7 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                         name="method"
                         id="method"
                         value={"Pickup"}
+                        onChange={(e)=>{ handleChange(e)}}
                         defaultChecked
                         readOnly
                       />
@@ -94,9 +141,10 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                         <Col md={12}>
                           <input
                             type="radio"
-                            name="pickup"
+                            name="pickupTime"
                             id="pickup1"
-                            value={"15to30min"}
+                            value={"15 to 30 min"}
+                            onChange={(e)=>{ handleChange(e)}}
                             defaultChecked
                           />
                           <label htmlFor="pickup1">15 to 30 minutes</label>
@@ -104,14 +152,17 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                         <Col md={12}>
                           <input
                             type="radio"
-                            name="pickup"
+                            name="pickupTime"
                             id="pickup2"
-                            value={"Pickup"}
+                            value={"schedule"}
+                            onChange={(e)=>{ handleChange(e)}}
+                            ref={schedule}
+                            
                           />
                           <label htmlFor="pickup2">Schedule for later</label>
                         </Col>
                         <Col md={12}>
-                          <input type="datetime-local" name="" id="" />
+                          <input type="datetime-local" name="pickupDate" onChange={(e)=>{ handleChange(e)}}  required={requi}/>
                         </Col>
                       </Row>
                     </Col>
@@ -127,9 +178,10 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                         <Col md={12}>
                           <input
                             type="radio"
-                            name="orderUpdate"
+                            name="orderUpdatemsg"
                             id="orderUpdate1"
-                            value={"yes"}
+                            value={true}
+                            onChange={(e)=>{ handleChange(e)}}
                             defaultChecked
                           />
                           <label htmlFor="orderUpdate1">Yes</label>
@@ -137,9 +189,10 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                         <Col md={12}>
                           <input
                             type="radio"
-                            name="orderUpdate"
+                            name="orderUpdatemsg"
                             id="orderUpdate2"
-                            value={"no"}
+                            onChange={(e)=>{ handleChange(e)}}
+                            value={false}
                           />
                           <label htmlFor="orderUpdate2">No</label>
                         </Col>
@@ -165,7 +218,7 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                             mask="999-999-9999"
                             maskChar={"_"}
                             placeholder={"___-___-____"}
-                            // onChange={handleChange}
+                            onChange={(e)=>{ handleChange(e)}}
                             name="phoneNumber"
                             required
                           />
@@ -192,8 +245,7 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                         placeholder="Special instructions"
                         rows={5}
                         style={{ resize: "none" }}
-                        // onChange={handleChange}
-                        // value={values.specialInstructions}
+                        onChange={(e)=>{ handleChange(e)}}
                       />
                     </Col>
                   </Row>
@@ -205,16 +257,17 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                     <Col md={9}>
                       <input
                         type="radio"
-                        name="payment"
+                        name="paymentMethod"
                         id="payment"
-                        value={"payment"}
+                        value={"payment at resturent"}
+                        onChange={(e)=>{handleChange(e)}}
                         defaultChecked
                         readOnly
                       />
                       <label htmlFor="payment">Payment at Resturent</label>
                     </Col>
                   </Row>
-                </form>
+               
                 {/* Summay of items */}
                 <Row>
                   <Col xs={12} md={12} lg={12} className=" checkOutRows">
@@ -237,7 +290,7 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                             <tr className="checkOutRows" key={i}>
                               <td className="name">{e.name}</td>
                               <td>
-                                ${e.price+" "}x{" "+e.quantity}
+                                ${e.price + " "}x{" " + e.quantity}
                               </td>
                               <td>${p.toFixed(2)}</td>
                               <td className="remove">
@@ -276,7 +329,10 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                     </table>
                   </Col>
                   <Col md={12} className="text-center">
-                    <button className=" btn dish-btn btn-wide ">
+                    <button
+                      className=" btn dish-btn btn-wide "
+                      type="submit"
+                    >
                       Place Order
                     </button>
                     <hr />
@@ -316,7 +372,10 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                     <b>Hummus Grill</b>
                   </p>
                   <div className="text-center p-3">
-                    <button className="btn dish-btn btn-wide">
+                    <button
+                      className="btn dish-btn btn-wide"
+                      type="submit"
+                    >
                       Place order
                     </button>
                   </div>
@@ -338,6 +397,8 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
                   </tbody>
                 </table>
               </Col>
+              </Row>
+              </form>
             </Row>
           </div>
         )}
@@ -347,3 +408,4 @@ const CheckOut = ({ rm, subTotal, setSubTotal}) => {
 };
 
 export default CheckOut;
+export { NoCheckOut };

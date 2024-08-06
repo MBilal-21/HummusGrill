@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
@@ -8,9 +8,7 @@ import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 const Footer = () => {
 
-  useEffect(()=>{
-    console.log("footer");
-  },[])
+  
   return (
     <footer>
       <Container>

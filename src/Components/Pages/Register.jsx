@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Divider from "../Divider";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import PersonIcon from "@mui/icons-material/Person";
@@ -12,12 +12,15 @@ import InputMask from "react-input-mask";
 import { TermsAndCondition } from "../ModelsCartAndTerms";
 
 import Button from "react-bootstrap/Button";
+import { Appstate } from "../../App";
 
 const Register = () => {
   const [showTerms, setShowTerms] = useState(false);
   const handleShow = () => setShowTerms(true);
-
   const [err, setError] = useState(null);
+  const [matchPass, setmatchPass] = useState(true);
+  const [passLengthErr, setPassLengthErr] = useState(false);
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -26,23 +29,70 @@ const Register = () => {
     repeatPassword: "",
     phoneNumber: "", // Added phoneNumber field
     address: "", // Added address field
-    status: "", // Added status field
-    promoMsg: "", // Changed promo-msg to promoMsg
+    orderStatus: true, // Added status field
+    promoMsg: true, // Changed promo-msg to promoMsg
     agreeTerms: false, // Added agreeTerms field
+    image: "",
   });
+  const n = useNavigate();
+  const { userState, setUserState } =  useContext(Appstate);
 
+  useEffect(() => {
+    if (userState) {
+      n("/");
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
+    let newValue = type === "checkbox" ? checked : value;
+    if (type === "radio") {
+      if (value === "true") {
+        newValue = true;
+      } else {
+        newValue = false;
+      }
+    }
+
     setInput((preState) => ({ ...preState, [name]: newValue }));
+    if (name === "password" || name === "repeatPassword") {
+      setmatchPass(true);
+    }
+    setError(null);
   };
-  
+
   const handleClick = async (e) => {
     e.preventDefault();
-    // Here you can perform form validation and backend logic
-    // For now, let's just log the input
-    //  setError(error.response.data) use this in catch block
+    if(input.password.length < 6){
+      setPassLengthErr(true);
+      return;
+    }
+    if (input.password !== input.repeatPassword) {
+      setmatchPass(false);
+    } else {
+      setmatchPass(true);
+      if (
+        window.confirm(
+          `Registration will be succesfull or error email found \n ${
+            input.firstName + "\n" + input.email
+          }`
+        )
+      ) {
+        setError(null);
+        try {
+          localStorage.setItem("user", JSON.stringify(input));
+          setUserState(true);
+          navigate("/");
+        } catch (error) {
+          setError(error);
+        }
+      } else {
+        setError("The Error will be show here!");
+      }
+      // Here you can perform form validation and backend logic
+      // For now, let's just log the input
+      //  setError(error.response.data) use this in catch block
+    }
   };
 
   return (
@@ -117,6 +167,11 @@ const Register = () => {
               />
               <HomeIcon className="iconStyle" />
             </Form.Group>
+            <div>
+
+            {passLengthErr && (
+                <p className="m-0 text-danger">Minimum length of password should be 6</p>
+              )}
             <Form.Group
               className="inputPlusIcon mb-3"
               controlId="formPlaintextPassword"
@@ -130,24 +185,30 @@ const Register = () => {
               />
               <LockIcon className="iconStyle" />
             </Form.Group>
-            <Form.Group className="inputPlusIcon mb-3">
-              <Form.Control
-                type="password"
-                placeholder="REPEAT PASSWORD"
-                onChange={handleChange}
-                name="repeatPassword"
-                required
-              />
-              <LockIcon className="iconStyle" />
-            </Form.Group>
+            </div>
+            <div>
+              {!matchPass && (
+                <p className="m-0 text-danger">Password does not match</p>
+              )}
+              <Form.Group className="inputPlusIcon mb-3">
+                <Form.Control
+                  type="password"
+                  placeholder="REPEAT PASSWORD"
+                  onChange={handleChange}
+                  name="repeatPassword"
+                  required
+                />
+                <LockIcon className="iconStyle" />
+              </Form.Group>
+            </div>
             <Form.Group className="mb-3">
               <p>Online Order status updates via Sms</p>
               <label className="mx-2">
                 <Form.Check
                   inline
-                  name="status"
+                  name="orderStatus"
                   type={"radio"}
-                  value="Yes"
+                  value={true}
                   onChange={handleChange}
                   defaultChecked
                 />
@@ -156,9 +217,9 @@ const Register = () => {
               <label className="mx-2">
                 <Form.Check
                   inline
-                  name="status"
+                  name="orderStatus"
                   type={"radio"}
-                  value="No"
+                  value={false}
                   onChange={handleChange}
                 />
                 No
@@ -174,7 +235,7 @@ const Register = () => {
                   inline
                   name="promoMsg"
                   type="radio"
-                  value="Yes"
+                  value={true}
                   onChange={handleChange}
                   defaultChecked
                 />
@@ -185,7 +246,7 @@ const Register = () => {
                   inline
                   name="promoMsg"
                   type="radio"
-                  value="No"
+                  value={false}
                   onChange={handleChange}
                 />
                 No
@@ -198,6 +259,7 @@ const Register = () => {
                 id="terms"
                 onChange={handleChange}
                 name="agreeTerms"
+                required
               />
               <label htmlFor="terms"> By signing up I agree with </label>{" "}
               <Button

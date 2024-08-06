@@ -8,10 +8,8 @@ import ImageWithLoader from "./ImageWithLoader";
 import AddExtraModel from "./AddExtraModel";
 
 const ItemShow = ({ item }) => {
-  useEffect(()=>{
-    console.log("reder items show for menu and signature");
-  })
   const {handleClose,setAddToCartItem} = useContext(Appstate);
+  
   return (
     <Col md={6} sm={6} xs={12}>
       <div className="px-2">
@@ -25,14 +23,15 @@ const ItemShow = ({ item }) => {
             {/* item about */}
             <span>{item.about ? item.about : "No description available"}</span>
             {/* item price */}
-            <div className="price">{item.price ? "$" + item.price : ""}</div>
+            <div className="price">{item.price ? "$" + parseFloat(item.price).toFixed(2) : ""}</div>
             <button
               type="button"
               className="btn  dish-btn align-self-end"
               style={{ width: "minContent" }}
               onClick={() => {
-                handleClose();
-                setAddToCartItem(item);
+                handleClose("");
+                const I = JSON.parse(JSON.stringify(item))
+                setAddToCartItem({...I});
               }}
             >
               Add To Cart
@@ -47,7 +46,6 @@ const ItemShow = ({ item }) => {
 // -------------------------show items for create bag and create wrap------------------------------------------
 
 const CreateItems = ({parent,child,element,selectFunction}) => {
-  // const box = useRef();
   return (
     <Col lg={6} sm={12} xs={12} onClick={() =>{selectFunction(parent,child,0)}}>
       {/* <!-- Box Start --> */}
@@ -62,7 +60,7 @@ const CreateItems = ({parent,child,element,selectFunction}) => {
             {/* element about */}
             <span>{element.about ? element.about : "No description available"}</span>
             {/* element price */}
-            <div className="price">{element.price ? "+$" + element.price : ""}</div>
+            <div className="price">{element.price && "+$" + parseFloat(element.price).toFixed(2)}</div>
           </Col>
         </Row>
       </div>
@@ -72,12 +70,7 @@ const CreateItems = ({parent,child,element,selectFunction}) => {
 };
 
 // --------------------add extra and skip button at create bowl and wrap----------------------
-const AddSkipItems = ( {extraItems, parent, selectFunction}) => {
-  // const searchParam = useSearchParams()
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const n=useNavigate();
-
-
+const AddSkipItems = ( {extraItems, parent, selectFunction, skipAll,skipState}) => {
   const [show , setShow] = useState(false)
   const handleClose = () => setShow(!show);
   return (<>
@@ -95,14 +88,7 @@ const AddSkipItems = ( {extraItems, parent, selectFunction}) => {
           </div>
           {/* </Link>  */}
           <div>
-         <div className="skipDivBtn" onClick={()=>{
-  // searchParam.append({ name: "name" }, { age: 23 });
-  // console.log(searchParam.get("name"));
-  // setSearchParams({ hello: "world" });
-  // n("?model=1&name=2")
-
-// console.log(searchParams);
-            }}>
+         <div className={`skipDivBtn`} id={ `${skipState && "activeSkip"}`} onClick={()=>{ skipAll(parent)}} >
               <ClearIcon className="icon" />
             </div>
             <span>Skip All</span>

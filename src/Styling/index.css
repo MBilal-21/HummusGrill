@@ -152,6 +152,9 @@ header .NavBar {
 .NavBar .nav-link {
   color: var(--text-color) !important;
 }
+.NavBar .nav-link:hover{
+  color: var(--first-color) !important;
+}
 
 .upperFixedBar {
   min-height: 28px;
@@ -187,7 +190,8 @@ header .menu-link {
   margin: 10px auto;
   text-align: center;
   background-color: #000;
-  width: 200px;
+  max-width: 100%;
+  min-width: 200px;
   padding: 5px;
   box-shadow: 0 0 5px rgb(31, 31, 30);
 }
@@ -342,6 +346,9 @@ footer .contact li:hover,
 .about .commontop p {
   margin: 0 0 24px;
 }
+.about .des{
+  text-align: justify;
+}
 .about .homeImageSlides{
   filter: brightness(1);
   max-width: 500px ;
@@ -464,8 +471,14 @@ footer .contact li:hover,
 .skipDiv .skipDivBtn:hover > .icon{
   color: var(--first-color);
 }
+#activeSkip{
+  background: var(--text-color);
+}
+#activeSkip .icon{
+  color: var(--first-color);
+}
 .intruction{
-   height: 150px;
+  height: 150px;
  margin-top: 60px;
  padding-top: 10px; 
 }
@@ -751,6 +764,13 @@ padding: 10px 0;
   width: 100%;
   padding: 10px;
   border-radius: 5px;
+}
+/* ----------------view ordered history items -------------------*/
+.view-order-body{
+  background: white;
+  text-align: center;
+  margin: auto;
+  padding: 1rem
 }
 
  

@@ -41,8 +41,8 @@ const Dishes = () => {
           heading={"BUILD YOUR OWN MEAL"}
           about={"Create your Meal to fit your taste."}
         />
-        <Dish link={"/create-bowl"} img={createBowl} btn={"Craete a Bowl"} />
-        <Dish link={"/create-wrap"} img={createWrap} btn={"Craete a Wrap"} />
+        <Dish link={"/create-meal/0"} img={createBowl} btn={"Craete a Bowl"} />
+        <Dish link={"/create-meal/1"} img={createWrap} btn={"Craete a Wrap"} />
         <Dish link={"/signature-wrap"} img={signatureWrap} btn={"Signature Wraps"} />
       </Row>
     </Container>

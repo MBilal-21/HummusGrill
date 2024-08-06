@@ -1,0 +1,38 @@
+{
+  "menu": {
+    "categories": [
+      {
+        "title": "Signature",
+        "description": "Experience our chef's special creations.",
+        "dishes": [
+          {
+            "name": "Signature Dish 1",
+            "description": "A delightful mix of flavors.",
+            "price": 12.99
+          },
+          {
+            "name": "Signature Dish 2",
+            "description": "An exquisite taste experience.",
+            "price": 14.99
+          }
+        ]
+      },
+      {
+        "title": "Create Bowl",
+        "description": "Build your own customized bowl with fresh ingredients.",
+        "dishes": [
+          {
+            "name": "Protein Bowl",
+            "description": "Your choice of protein with a mix of greens.",
+            "price": 10.99
+          },
+          {
+            "name": "Veggie Bowl",
+            "description": "A variety of fresh vegetables and grains.",
+            "price": 9.99
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -2,9 +2,7 @@ import React, { useEffect } from 'react'
 import Row from 'react-bootstrap/Row';
 import ItemShow from './ItemShow';
 const ItemsMap = ({items = []}) => {
-  useEffect(()=>{
-    console.log("item Map render");
-  },[])
+  
 
   return (
     <Row className='xs-text-center'>

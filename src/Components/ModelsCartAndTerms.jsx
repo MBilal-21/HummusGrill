@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
 import ImageWithLoader from "./ImageWithLoader";
 
 // My Cart component
-const Mycart = ({ sh, remove, increment, decrement, clearBag, subTotal }) => {
-  const { cartItems, handleClose } = useContext(Appstate);
+const Mycart = ({ sh, remove, increment, decrement, clearBag }) => {
+  const { cartItems, handleClose,subTotal,userState } = useContext(Appstate);
 
   return (
     <Offcanvas
@@ -44,16 +44,15 @@ const Mycart = ({ sh, remove, increment, decrement, clearBag, subTotal }) => {
                     {item.category === "signature" &&
                       item.ingrediants.map((ingrediant, i) => (
                         <span key={i}>
-                          {ingrediant.selected && ingrediant.name}
+                          {ingrediant.selected && ingrediant.name}{", "}
                         </span>
                       ))}
                     {item.category === "createMeal" &&
                       item.ingrediants.map((ingrediant, i) => {
-                        // console.log(ingrediant);
                         return ingrediant.items.map((e, index) => (
                           <span key={e.id + index}>
-                            {e.selected && e.name}{" "}
-                            <span>{e.addExtra && "Extra" + e.name}</span>{" "}
+                            {e.selected && e.name + ", "}{" "}
+                            <span>{e.addExtra && "Extra" + e.name + ", "}</span>{" "}
                           </span>
                         ));
                       })}
@@ -96,24 +95,24 @@ const Mycart = ({ sh, remove, increment, decrement, clearBag, subTotal }) => {
                       Remove
                     </button>
                   </div>
+                  {item.category === "createMeal" && <div className="col-6 px-1">
+                     <Link to={`/create-meal/7?editmeal=${item.id}&&i=${index}`} state={item}> <button className="btn dish-btn w-100">Change</button></Link>
+                    </div>}
                   {/* <div className="col-6 px-1">
-                      <button className="btn dish-btn w-100">Change</button>
-                    </div> */}
-                  <div className="col-6 px-1">
                     <button className="btn dish-btn w-100">Update</button>
-                  </div>
+                  </div> */}
                 </div>
                 <hr />
               </div>
             ))}
 
             <div className="cart-foot-btn">
-              <Link to={"/cart"} onClick={()=>handleClose("cart")}>
+              <Link to={userState ? "/cart" : "/login"} onClick={()=>handleClose("cart")}>
                 <button className="btn cartbtn">
                   Go To Checkout {"$ " + subTotal}
                 </button>
               </Link>
-              <Link to={"/"}>
+              <Link to={"/"} onClick={()=>handleClose("cart")}>
                 <button className="btn cartbtn">Add More items</button>
               </Link>
               <button className="btn cartbtn" onClick={clearBag}>
@@ -128,30 +127,30 @@ const Mycart = ({ sh, remove, increment, decrement, clearBag, subTotal }) => {
 };
 
 // Add to cart button component
-const AddToCart = ({ sh, subTotal, setSubTotal }) => {
-  const { setCartItems, cartItems, AddToCartItem, handleClose } =
+const AddToCart = ({ sh }) => {
+  const { setCartItems, cartItems, AddToCartItem, handleClose,subTotal, setFormattedSubTotal } =
     useContext(Appstate);
-  const [item, setItem] = useState(AddToCartItem);
+  const [item, setItem] = useState({...AddToCartItem});
 
   useEffect(() => {
-    // console.log(item);
     setItem(AddToCartItem);
   }, [AddToCartItem]);
   const incre = () =>{
     setItem({...item, quantity: item.quantity + 1})
   }
   const decre = () =>{
-    setItem({...item, quantity: item.quantity - 1})
+    setItem({...item, quantity: item.quantity > 1? item.quantity - 1 : 1})
   }
 
   const funcToAddInCart = () => {
     const it = { ...item };
-    let p = parseFloat(subTotal);
+    let p ;
     const date = new Date().getTime();
     it.id = date;
     const updatedCartItems = [...cartItems, it];
-    p = it.price*it.quantity;
-    setSubTotal(p);
+    p =  Number(it.price)* Number(it.quantity);
+    p += Number(subTotal);
+    setFormattedSubTotal(p);
     setCartItems(updatedCartItems);
     handleClose("cart");
     handleClose();
@@ -160,10 +159,8 @@ const AddToCart = ({ sh, subTotal, setSubTotal }) => {
     const it = { ...item };
     it.ingrediants[i].selected = value;
     setItem(it);
-    // console.log(item);
   };
   const handleInstruct = (e) => {
-    // console.log(item);
     let nam = e.target.name;
     let value = e.target.value;
     setItem((prev) => {
@@ -190,7 +187,7 @@ const AddToCart = ({ sh, subTotal, setSubTotal }) => {
         </div>
         <div className="text-light bg-black px-3 d-flex justify-content-between align-items-center my-2">
           <h4>{item.name}</h4>
-          <span>${item.price}</span>
+          <span>${parseFloat(item.price).toFixed(2)}</span>
         </div>
         {/* signature wrap ingrediants start */}
         <div>

@@ -1,34 +1,27 @@
-// Importing necessary dependencies and hooks from React
-import React, { useEffect, useState } from "react";
-
-// Importing the Divider component
+import React, { useContext, useEffect, useState } from "react";
 import Divider from "../Divider";
-
-// Importing the Container component from react-bootstrap
 import Container from "react-bootstrap/Container";
-// Importing the Link component from react-router-dom
-import { Link } from "react-router-dom";
-// Importing the Form component from react-bootstrap
+import { Link, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-// Importing the LockIcon from @mui/icons-material
 import LockIcon from "@mui/icons-material/Lock";
-
-// Importing the EmailIcon from @mui/icons-material
 import EmailIcon from "@mui/icons-material/Email";
+import { Appstate } from "../../App";
 
-// Defining the Login functional component
-const Login = () => {
-  // Initializing state for error and input using useState hook
+const Login = ({ LoginFunction }) => {
+  const {userState} = useContext(Appstate)
   const [err, setError] = useState(null);
   const [Input, setInput] = useState({
     email: "",
     password: "",
   });
+  const n = useNavigate();
 
   // Using useEffect hook to log the input state whenever it changes
   useEffect(() => {
-    // console.log(input);
-  }, [Input]);
+    if (userState) {
+           n("/");
+    }
+  }, []);
 
   // Defining the handleChange function to handle input changes
   const handleChange = (e) => {
@@ -36,10 +29,18 @@ const Login = () => {
     // Updating the input state with the new value
     setInput((preState) => ({ ...preState, [name]: value }));
   };
-
+ const handleError = (msg)=>{
+  setError(msg);
+ }
   // Defining the handleClick function to handle form submission
   const handleClick = async (e) => {
     e.preventDefault();
+    try {
+      const e = await LoginFunction(Input, handleError);
+      console.log(e);
+    } catch (error) {
+      console.log(error);
+    }
     // Here you can perform form validation and backend logic
     // For now, let's just log the input
     // setError(error.response.data) use this in catch block
@@ -113,5 +114,4 @@ const Login = () => {
   );
 };
 
-// Exporting the Login component
 export default Login;
