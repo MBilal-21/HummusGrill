@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Appstate } from "../App";
 import ToastMeal from "./ToastinMeal";
 const CreateBag = ({meal, selectFunction,   resetMeal, countItems,editmealId,editIndex }) => {
-  const[err, setErr] = useState(true);
+  const[err, setErr] = useState(false);
   const {handleClose,setAddToCartItem, cartItems, setCartItems, subTotal,setFormattedSubTotal} = useContext(Appstate);
  
   const openAddCart = () =>{
