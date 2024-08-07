@@ -1,20 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import Container from "react-bootstrap/esm/Container";
 import SectionHeader from "../SectionHeader";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import {  NavLink, Outlet, useLocation } from "react-router-dom";
+import {  NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import PersonSharpIcon from "@mui/icons-material/PersonSharp";
+import { Appstate } from "../../App";
 
 
 const Dashboard = () => {
     const linktabP = useRef();
     const linktabH = useRef();
     const show = useLocation();
-  
+    const navigate = useNavigate();
+  const {userState} = useContext(Appstate)
 useEffect(() => {
+  if (!userState) {
+    navigate("/login")
+  }
     if (show === "/dashboard") {
- 
       linktabP.current.classList.add("active");
       linktabH.current.classList.remove("active");
     }

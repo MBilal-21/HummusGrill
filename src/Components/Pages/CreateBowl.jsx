@@ -4,6 +4,7 @@ import CreateBag from "../CreateBag";
 import CreateChoiceItems from "../CreateChoiceItems";
 import { ItemList } from "../../itemsList/items";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import Loading from "../Loading";
 
 const CreateBowl = () => {
   const [loading, setLoading] = useState(true);
@@ -132,7 +133,7 @@ const CreateBowl = () => {
   return (
     <Container className="createSection">
       {loading ? (
-        <div>loading...</div>
+        <Loading/>
       ) : (
         <>
           <CreateChoiceItems

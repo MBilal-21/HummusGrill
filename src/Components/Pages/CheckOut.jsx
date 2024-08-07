@@ -31,8 +31,7 @@ const NoCheckOut = () => {
 };
 
 const CheckOut = ({ rm}) => {
-  const { cartItems,subTotal,setCartItems } = useContext(Appstate);
-  const [total, setTotal] = useState(0.0);
+  const { cartItems,subTotal,setCartItems,setFormattedSubTotal} = useContext(Appstate);
   const [taxes, setTaxes] = useState(0.0);
   const navigate = useNavigate();
   const [isEmpty, setIsEmpty] = useState(false);
@@ -47,11 +46,11 @@ const CheckOut = ({ rm}) => {
     specialInstructions:"",
     paymentMethod:"payment at resturent",
   })
+  const {phoneNumber, ...others} =  JSON.parse(localStorage.getItem("user")) || "";
   useEffect(() => {
     cartItems.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
-    setTaxes(1.6);
-    let p = Number(taxes) + Number(subTotal);
-    setTotal(parseFloat(p).toFixed(2));
+    setInputData((pre)=> ({...pre, ["phoneNumber"]: phoneNumber}))
+    setTaxes(1.6)
   }, [cartItems]);
 
  
@@ -66,25 +65,22 @@ const CheckOut = ({ rm}) => {
        placeData: {...inputData},
        taxes:taxes,
        subTotal: subTotal,
-       total: total,
+       total: parseFloat(Number(taxes) + Number(subTotal)).toFixed(2),
        orderDate: t.toDateString(),
        orderStatus: "pending"
       };
     parsedOrders.push(newoder);
-    // Store the updated orders array back to localStorage
     localStorage.setItem("Orders", JSON.stringify(parsedOrders));
-    // Clear the cart items (assuming setCartItems is a function that updates the state)
     setCartItems([]);
-    // Navigate to the checkout page
+    setFormattedSubTotal(0.00);
     navigate(`/checkout/${newoder.orderId}`);
   };
 
   const handleChange = (e) =>{
-    const { name, value,type, checked } = e.target;
-    // const newValue = type === "radio" ? checked : value; 
+    const { name, value} = e.target;
     setRequi(schedule.current.checked) 
     setInputData((prevData) => ({ ...prevData, [name]: value }));
-
+    
   }
 
   return (
@@ -221,6 +217,7 @@ const CheckOut = ({ rm}) => {
                             onChange={(e)=>{ handleChange(e)}}
                             name="phoneNumber"
                             required
+                            defaultValue={phoneNumber}
                           />
                         </Col>
 
@@ -335,8 +332,8 @@ const CheckOut = ({ rm}) => {
                     >
                       Place Order
                     </button>
-                    <hr />
-                    <table className="table mb-0 text-start">
+                    <hr className="display-1-6-col"/>
+                    <table className="display-1-6-col table mb-0 text-start">
                       <tbody>
                         <tr style={{ fontWeight: "bold" }}>
                           <td>Subtotal</td>
@@ -348,7 +345,7 @@ const CheckOut = ({ rm}) => {
                         </tr>
                         <tr className="display-1-6-col">
                           <td>Total</td>
-                          <td>${total}</td>
+                          <td>${parseFloat(Number(taxes) + Number(subTotal)).toFixed(2)}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -392,7 +389,7 @@ const CheckOut = ({ rm}) => {
                     </tr>
                     <tr>
                       <td>Total</td>
-                      <td>${total}</td>
+                      <td>${parseFloat(Number(taxes) + Number(subTotal)).toFixed(2)}</td>
                     </tr>
                   </tbody>
                 </table>

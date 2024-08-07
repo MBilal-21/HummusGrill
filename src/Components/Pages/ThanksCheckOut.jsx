@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import SectionHeader from "../SectionHeader";
 import { Link, useParams } from "react-router-dom";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
-// import { NoCheckOut } from "./CheckOut";
-// import { Appstate } from "../../App";
+
 const ThanksCheckOut = () => {
    const {orderId} = useParams();
+  const userName = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="text-center about">
       <div>
@@ -22,7 +23,7 @@ const ThanksCheckOut = () => {
         </h2>
         <div>
           <p className="fs-5" style={{ color:"gray"}}>
-            <span style={{lineHeight:"3rem", fontWeight:"bold"}}> Hi Super Admin </span> , <br />
+            <span style={{lineHeight:"3rem", fontWeight:"bold"}}> Hi {userName?.firstName + " "+userName?.lastName} </span> , <br />
             We have received your order. <br /> You Can Pick your order in 15 to
             30 min. <br />
             <span style={{lineHeight:"3rem", }}>Your Order ID: {orderId}</span>

@@ -68,6 +68,7 @@ const ViewOrderedHistory = () => {
                                 ) : (
                                   ingrediant.items.map((e, index) => (
                                     <React.Fragment key={e.id + index}>
+
                                       {e.selected && (
                                         <>
                                           {" "}
@@ -75,7 +76,7 @@ const ViewOrderedHistory = () => {
                                           <ul  style={{listStyleType:"disc" }}>
                                             <li>Quantity : 1</li>
                                             <li>
-                                              Extra Price{" : "}
+                                              Extra Price{" : $"}
                                               {e.price
                                                 ? parseFloat(e.price).toFixed(2)
                                                 : "0.00"}
@@ -83,16 +84,18 @@ const ViewOrderedHistory = () => {
                                           </ul>
                                         </>
                                       )}{" "}
+                                       
+                                       
                                       {e.addExtra && (
                                         <>
                                           <li><strong> {"Extra" + e.name}</strong></li>
                                           <ul>
                                             <li>Quantity : 1</li>
                                             <li>
-                                              Extra Price{" : "}
-                                              {e.ExtraPrice
+                                              Extra Price{" : $"}
+                                              {e.extraPrice
                                                 ? parseFloat(
-                                                    e.ExtraPrice
+                                                    e.extraPrice
                                                   ).toFixed(2)
                                                 : "0.00"}
                                             </li>

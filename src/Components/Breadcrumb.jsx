@@ -11,9 +11,9 @@ const Breadcrumbs = () => {
   useEffect(() => {
     // set heading
    
-    if (location.pathname.startsWith("/create-meal"))
+    if (pathnames[0] === "create-meal")
       setShowCurrentH("Create Meal");
-    if (location.pathname.startsWith("/view-ordered-history"))
+    else if (location.pathname.startsWith("/view-ordered-history"))
       setShowCurrentH("view ordered history");
     else if (location.pathname.startsWith("/checkout"))
       setShowCurrentH("Thankyou");
@@ -38,18 +38,18 @@ const Breadcrumbs = () => {
             Home
           </Link>
           {pathnames.map((name, index) => {
-            breadcrumbPath += `/${name}`;
+            // breadcrumbPath += `/${name}`;
             const isLast = index === pathnames.length - 1;
 
             return isLast ? (
-              <span key={breadcrumbPath}> / {name}</span>
+              <span key={index}> / {name}</span>
             ) : (
-              <span key={breadcrumbPath}>
+              <span key={index}>
                 {" "}
                 /{" "}
-                <Link to={breadcrumbPath} className="breadlink">
+                <span>
                   {name}
-                </Link>
+                </span>
               </span>
             );
           })}
