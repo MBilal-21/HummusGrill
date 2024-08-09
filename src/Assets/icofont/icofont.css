@@ -43,6 +43,11 @@ url("./fonts/icofont.woff") format("woff");
   content: "\eeb0";
 }
 
+.icofont-bubble-up:before
+{
+  content: "\ea66";
+}
+
 [class^="icofont-"].icofont-duotone,
 	[class*=" icofont-"].icofont-duotone
 {

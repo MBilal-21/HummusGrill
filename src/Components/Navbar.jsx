@@ -40,25 +40,25 @@ function NavBar({ logout }) {
                   <Dropdown.Toggle as={NavLink} className="HoverYellow">
                     <PersonIcon className="header-icon " /> My Account
                   </Dropdown.Toggle>
-                  <Dropdown.Menu>
+                  <Dropdown.Menu >
                     {userState ? (
                       <>
                         <Link
                           to={"/dashboard/profile"}
-                          className="dropdown-item"
+                          className="dropdown-item  HoverYellow"
                         >
                           Dashboard
                         </Link>
-                        <div className="dropdown-item" onClick={logout}>
+                        <div className="dropdown-item  HoverYellow" onClick={logout}>
                           Logout
                         </div>
                       </>
                     ) : (
                       <>
-                        <Link to={"login"} className="dropdown-item">
+                        <Link to={"login"} className="dropdown-item  HoverYellow">
                           Login
                         </Link>
-                        <Link to={"register"} className="dropdown-item">
+                        <Link to={"register"} className="dropdown-item  HoverYellow">
                           Register
                         </Link>
                       </>
@@ -111,11 +111,11 @@ function NavBar({ logout }) {
                     MENU
                   </Link>
                   <NavDropdown title="BUILD YOUR MEAL" id="basic-nav-dropdown">
-                    <Link to="/create-meal/0" className="dropdown-item">
+                    <Link to="/create-meal/0" className="dropdown-item HoverYellow">
                       CREATE BOWL
                     </Link>
                     <NavDropdown.Divider />
-                    <Link to="/create-meal/1" className="dropdown-item">
+                    <Link to="/create-meal/1" className="dropdown-item HoverYellow">
                       CREATE WRAP
                     </Link>
                   </NavDropdown>

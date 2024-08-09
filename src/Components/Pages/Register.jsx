@@ -27,11 +27,11 @@ const Register = () => {
     email: "",
     password: "",
     repeatPassword: "",
-    phoneNumber: "", // Added phoneNumber field
-    address: "", // Added address field
-    orderStatus: true, // Added status field
-    promoMsg: true, // Changed promo-msg to promoMsg
-    agreeTerms: false, // Added agreeTerms field
+    phoneNumber: "", 
+    address: "", 
+    orderStatus: true, 
+    promoMsg: true, 
+    agreeTerms: false, 
     image: "",
   });
   const n = useNavigate();

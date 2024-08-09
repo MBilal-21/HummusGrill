@@ -24,8 +24,7 @@ import ThanksCheckOut from "./Components/Pages/ThanksCheckOut.jsx";
 import Profile from "./Components/Pages/Profile.jsx";
 import OrderedHistory from "./Components/Pages/OrderedHistory.jsx";
 import ViewOrderedHistory from "./Components/Pages/ViewOrderedHistory.jsx";
-import ToastMeal from "./Components/ToastinMeal.jsx";
-
+import ScrollToTop from "./Components/ScrollToUpBtn.jsx";
 export const Appstate = createContext();
 
 const Layout = ({
@@ -58,6 +57,7 @@ const Layout = ({
           decrement={decrement}
           clearBag={clearBag}
         />
+        <ScrollToTop />
         <Outlet />
       </main>
       <Footer />
